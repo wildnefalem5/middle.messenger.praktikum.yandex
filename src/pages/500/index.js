@@ -1,6 +1,7 @@
 import Handlebars from "handlebars";
-import pagePlaceholderTemplate from "../../components/page-placeholder";
 import template from 'bundle-text:./template.hbs';
+
+import pagePlaceholderTemplate from "../../components/page-placeholder";
 
 Handlebars.registerPartial("page500", template);
 

@@ -29,37 +29,22 @@
             fill="white"
           ></path>
         </svg>
+        <label class="account-page__avatar-file">
+            {{> input type="file" name="avatar" class="account-page__avatar-file-input" }}
+            Change avatar
+        </label>
       </div>
-
-
+      
       <div class="account-page__info" data-tab="user-info">
         <ul class="account-page__info-list">
-          <li class="account-page__info-list-item">
-            <span class="account-page__info-list-item-name">Email</span>
-            <span
-              class="account-page__info-list-item-value"
-            >pochta@yandex.ru</span>
-          </li>
-          <li class="account-page__info-list-item">
-            <span class="account-page__info-list-item-name">Login</span>
-            <span class="account-page__info-list-item-value">ivanivanov</span>
-          </li>
-          <li class="account-page__info-list-item">
-            <span class="account-page__info-list-item-name">First name</span>
-            <span class="account-page__info-list-item-value">Иван</span>
-          </li>
-          <li class="account-page__info-list-item">
-            <span class="account-page__info-list-item-name">Second name</span>
-            <span class="account-page__info-list-item-value">Иванов</span>
-          </li>
-          <li class="account-page__info-list-item">
-            <span class="account-page__info-list-item-name">Chat name</span>
-            <span class="account-page__info-list-item-value">Иван</span>
-          </li>
-          <li class="account-page__info-list-item">
-            <span class="account-page__info-list-item-name">Phone</span>
-            <span class="account-page__info-list-item-value">+7 (777) 777 77 77</span>
-          </li>
+          {{#each user}}
+            <li class="account-page__info-list-item">
+              <span class="account-page__info-list-item-name">{{ field }}</span>
+              <span
+                class="account-page__info-list-item-value"
+              >{{ value }}</span>
+            </li>
+          {{/each}}
         </ul>
         <div class="account-page__info-buttons">
           {{> button text="Edit info" class="button account-page__info-button" attributes="data-tab-user-form-opener" }}

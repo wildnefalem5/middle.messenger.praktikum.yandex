@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
-
 import defaultTemplate from "bundle-text:./index.hbs";
+
 import pageNotFoundTemplate from "./pages/404";
 import serviceWorkPageTemplate from "./pages/500";
 import accountPageTemplate from "./pages/account";
@@ -11,7 +11,6 @@ import registrationPageTemplate from "./pages/registration";
 import "./styles.scss";
 
 const setTemplate = (template) => {
-  console.log(location.pathname,{ template: template()})
   document.getElementById("root").innerHTML = template();
 };
 

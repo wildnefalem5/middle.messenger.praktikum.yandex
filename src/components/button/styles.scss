@@ -3,9 +3,9 @@
   padding: 1rem 3.2rem;
   background-color: $button-background-color;
   color: $button-text-color;
-  font-size: 1.3rem;
-  font-weight: 700;
-  line-height: calc(20 / 13);
+  font-size: $button-font-size;
+  font-weight: $button-font-weight;
+  line-height: $button-font-line-height;
   text-transform: uppercase;
   border-color: transparent;
   cursor: pointer;

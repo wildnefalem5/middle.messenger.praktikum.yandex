@@ -1,7 +1,8 @@
 import Handlebars from "handlebars";
+import template from 'bundle-text:./template.hbs';
+
 import fieldTemplate from '../../components/field'
 import buttonTemplate from '../../components/button'
-import template from 'bundle-text:./template.hbs';
 
 Handlebars.registerPartial("loginPage", template);
 

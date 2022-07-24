@@ -1,7 +1,9 @@
 import Handlebars from "handlebars";
+import template from 'bundle-text:./template.hbs';
+
 import fieldTemplate  from '../../components/field'
 import buttonTemplate from '../../components/button'
-import template from 'bundle-text:./template.hbs';
+import inputTemplate from "../../components/input";
 
 
 class AccountPage extends HTMLElement {
@@ -80,12 +82,23 @@ class AccountPage extends HTMLElement {
 
 customElements.define("account-page", AccountPage);
 
+const user = [
+  {field: 'Email', value: 'wildnefalem5@gmail.com'},
+  {field: 'Login', value: 'securityOleg'},
+  {field: 'First name', value: 'Oleg'},
+  {field: 'Second name', value: 'Olegov'},
+  {field: 'Chat name', value: 'Oleg'},
+  {field: 'Phone', value: '+7 (777) 777 77 77'}
+]
+
 Handlebars.registerPartial("account-page", template);
 
 export default (props) => {
   return Handlebars.compile(template)({
     ...props, 
     field: fieldTemplate,
-    button: buttonTemplate
+    button: buttonTemplate,
+    input: inputTemplate,
+    user: user
   });
 };
