@@ -54,10 +54,13 @@
       cursor: pointer;
 
       &-input {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 0;
         height: 0;
         opacity: 0;
-        position: fixed;
+        pointer-events: none;
       }
 
       &:hover {
@@ -111,6 +114,7 @@
   &__logout {
     @include small-text;
 
+    display: block;
     font-weight: 500;
     text-align: center;
     color: $red-color;
