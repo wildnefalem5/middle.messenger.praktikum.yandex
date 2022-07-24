@@ -18,6 +18,6 @@ npm run dev
 - npm run start - запуск <code>express</code> с раздачей статики <code>dist</code> 
 
 ### Прочее
-[Ссылка на Netlify](https://euphonious-blancmange-3e8bfe.netlify.app/)
+[Ссылка на Netlify](https://sparkly-crisp-93f099.netlify.app/)
 
 [Ссылка на макет в Figma](https://www.figma.com/file/qI8cgS22gEYHIiG5wQEpU9/Messenger?node-id=0%3A1)
