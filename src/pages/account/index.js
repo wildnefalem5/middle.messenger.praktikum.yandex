@@ -1,3 +1,9 @@
+import Handlebars from "handlebars";
+import fieldTemplate  from '../../components/field'
+import buttonTemplate from '../../components/button'
+import template from 'bundle-text:./template.hbs';
+
+
 class AccountPage extends HTMLElement {
   constructor() {
     super();
@@ -73,3 +79,13 @@ class AccountPage extends HTMLElement {
 }
 
 customElements.define("account-page", AccountPage);
+
+Handlebars.registerPartial("account-page", template);
+
+export default (props) => {
+  return Handlebars.compile(template)({
+    ...props, 
+    field: fieldTemplate,
+    button: buttonTemplate
+  });
+};

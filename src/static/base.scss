@@ -109,3 +109,12 @@ form {
 .hidden {
   display: none !important;
 }
+
+.temporary-navigation {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  display: flex;
+  flex-flow: column;
+  row-gap: 1rem;
+}

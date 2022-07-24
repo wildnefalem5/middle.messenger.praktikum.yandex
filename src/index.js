@@ -1,12 +1,37 @@
+import Handlebars from "handlebars";
+
+import defaultTemplate from "bundle-text:./index.hbs";
+import pageNotFoundTemplate from "./pages/404";
+import serviceWorkPageTemplate from "./pages/500";
+import accountPageTemplate from "./pages/account";
+import chatPageTemplate from "./pages/chat";
+import loginPageTemplate from "./pages/login";
+import registrationPageTemplate from "./pages/registration";
+
 import "./styles.scss";
 
-import template from './index.hbs';
-import page404 from './pages/404';
-import input from './components/input'
-import field from './components/field'
-import button from './components/button'
-import page500 from './pages/500'
-import pagePlaceholder from './components/page-placeholder'
-import account from './pages/account'
+const setTemplate = (template) => {
+  console.log(location.pathname,{ template: template()})
+  document.getElementById("root").innerHTML = template();
+};
 
-document.getElementById('root').innerHTML = template();
+const compiledDefaultTemplate = Handlebars.compile(defaultTemplate);
+
+document.addEventListener("DOMContentLoaded", () => {
+  switch (location.pathname) {
+    case "/404":
+      return setTemplate(pageNotFoundTemplate);
+    case "/500":
+      return setTemplate(serviceWorkPageTemplate);
+    case "/account":
+      return setTemplate(accountPageTemplate);
+    case "/chat":
+      return setTemplate(chatPageTemplate);
+    case "/login":
+      return setTemplate(loginPageTemplate);
+    case "/registration":
+      return setTemplate(registrationPageTemplate);
+    default:
+      setTemplate(compiledDefaultTemplate);
+  }
+});
