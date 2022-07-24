@@ -19,10 +19,8 @@
     }
 
     &-fields {
-      display: flex;
-      flex-wrap: wrap;
-      column-gap: 2.4rem;
-      row-gap: 2.4rem;
+      @include form-fields;
+      
       margin-bottom: 4.8rem;
     }
   }

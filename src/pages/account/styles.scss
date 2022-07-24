@@ -1,0 +1,114 @@
+.account-page {
+  display: flex;
+  min-height: 100vh;
+
+  &__back-to-chat {
+    display: flex;
+    align-items: center;
+    background-color: $secondary-color;
+    padding: 0.8rem;
+
+    &-arrow {
+      width: 4.8rem;
+      height: 4.8rem;
+    }
+  }
+
+  &__main {
+    flex: 1;
+    padding: 3.2rem 0;
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $secondary-color;
+    height: 16.7rem;
+    margin-bottom: 3.2rem;
+
+    &-placeholder-image {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
+  &__info {
+    max-width: 51rem;
+    margin: 0 auto;
+
+    &-list {
+      padding: 0;
+      list-style: none;
+      margin: 0 0 4.8rem;
+
+      &-item {
+        @include small-text;
+
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+        border-top: 1px solid transparent;
+
+        &-name {
+          font-weight: 700;
+        }
+
+        &-value {
+          color: rgba($primary-color, 0.7);
+        }
+
+        & + & {
+          border-color: $border-color;
+        }
+      }
+    }
+
+    &-buttons {
+      display: flex;
+      column-gap: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    &-button {
+      flex: 1 0 calc(50% - 1rem);
+    }
+  }
+
+  &__logout {
+    @include small-text;
+
+    text-align: center;
+    color: $red-color;
+  }
+
+  &__user-form {
+    &-fields {
+      @include form-fields;
+
+      margin-bottom: 4.8rem;
+    }
+
+    &-button {
+      margin: 0 auto;
+    }
+
+    @media screen and (min-width: 990px) {
+      &-field {
+        flex: 1 0 calc(50% - 2.4rem);
+      }
+    }
+  }
+
+  &__password-form {
+    &-fields {
+      @include form-fields;
+
+      margin-bottom: 4.8rem;
+    }
+
+    &-button {
+      margin: 0 auto;
+    }
+  }
+}

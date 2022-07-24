@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars';
 import template from "./template.hbs";
 
-Handlebars.registerPartial("page500", template);
+Handlebars.registerPartial('pagePlaceholder', template)
 
 export default template
