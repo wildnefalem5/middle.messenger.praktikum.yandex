@@ -1,10 +1,16 @@
-<div>
-    <h2>Registration</h2>
-    {{> field }}
-    {{> field }}
-    {{> field }}
-    {{> field }}
-    {{> field }}
-    {{> field }}
-    <button>sign up</button>
+<div class="registration-page">
+    <div class="container registration-page__container">
+        <form class="registration-page__form">
+            <h2 class="h2 registration-page__form-title">Registration</h2>
+            <div class="registration-page__form-fields">
+                {{> field class="registration-page__form-field" label="First name" placeholder="Enter your firstname" }}
+                {{> field class="registration-page__form-field" label="Second name" placeholder="Enter your second name" }}
+                {{> field class="registration-page__form-field" label="Login" placeholder="Enter your login" }}
+                {{> field class="registration-page__form-field" label="Email" placeholder="Enter your email" }}
+                {{> field class="registration-page__form-field" label="Phone" placeholder="Enter your phone" }}
+                {{> field class="registration-page__form-field" label="Password" placeholder="Enter your password" }}
+            </div>
+            {{> button text="sign up" class="registration-page__form-button" }}
+        </form>
+    </div>
 </div>

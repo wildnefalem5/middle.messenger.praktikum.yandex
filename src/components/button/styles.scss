@@ -1,0 +1,10 @@
+.button {
+    padding: 1rem 3.2rem;
+    background-color: $button-background-color;
+    color: $button-text-color;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: calc(20 / 13);
+    text-transform: uppercase;
+    border-color: transparent;
+}

@@ -1,0 +1,16 @@
+@mixin caption {
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: calc(18 / 13);
+}
+
+@mixin small-text {
+  font-size: 1.4rem;
+  line-height: calc(22 / 14);
+}
+
+@mixin medium-text {
+  font-size: 1.6rem;
+  line-height: calc(24 / 16);
+}
+

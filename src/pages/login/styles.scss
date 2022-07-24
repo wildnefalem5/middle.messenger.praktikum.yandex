@@ -1,0 +1,31 @@
+.login-page {
+  height: 100vh;
+
+  &__container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__form {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 100%;
+    max-width: 28.7rem;
+
+    &-title {
+      margin-bottom: 2.8rem;
+    }
+
+    &-fields {
+      display: flex;
+      flex-flow: column;
+      row-gap: 2.4rem;
+      margin-bottom: 4.8rem;
+      width: 100%;
+    }
+  }
+}

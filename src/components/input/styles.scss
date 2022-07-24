@@ -1,8 +1,9 @@
 .input {
   padding: 1.6rem 2rem;
   border: 1px solid $border-color;
-  background-color: $secondary-color;
-  color: $primary-color;
+  background-color: $input-background-color;
+  color: $input-text-color;
+  width: 100%;
 
   &,
   &::placeholder {
