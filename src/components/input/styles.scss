@@ -16,11 +16,8 @@
     color: rgba($primary-color, 0.7);
   }
 
-  &:focus {
-    border-color: $primary-color;
-  }
-
   &:focus-visible {
+    border-color: $primary-color;
     outline: none;
   }
 }

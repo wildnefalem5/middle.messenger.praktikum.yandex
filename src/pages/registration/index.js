@@ -1,14 +1,15 @@
 import Handlebars from "handlebars";
-import fieldTemplate from '../../components/field'
-import buttonTemplate from '../../components/button'
-import template from 'bundle-text:./template.hbs';
+import template from "bundle-text:./template.hbs";
+
+import { fieldTemplate } from "../../components/field";
+import { buttonTemplate } from "../../components/button";
 
 Handlebars.registerPartial("registrationPage", template);
 
-export default (props) => {
+export const registrationPageTemplate = (props) => {
   return Handlebars.compile(template)({
     ...props,
     field: fieldTemplate,
-    button: buttonTemplate
+    button: buttonTemplate,
   });
 };

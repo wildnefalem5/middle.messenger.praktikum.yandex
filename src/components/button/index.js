@@ -3,6 +3,6 @@ import template from 'bundle-text:./template.hbs';
 
 Handlebars.registerPartial("button", template);
 
-export default (props) => {
+export const buttonTemplate = (props) => {
   return Handlebars.compile(template)(props);
 };
