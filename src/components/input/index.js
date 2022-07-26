@@ -1,8 +1,8 @@
 import Handlebars from "handlebars";
-import template from 'bundle-text:./template.hbs';
+import template from "./template.hbs";
 
 Handlebars.registerPartial("input", template);
 
 export const inputTemplate = (props) => {
-  return Handlebars.compile(template)(props);
+  return template(props);
 };

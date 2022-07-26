@@ -1,5 +1,4 @@
-import Handlebars from "handlebars";
-import defaultTemplate from "bundle-text:./index.hbs";
+import template from "./index.hbs";
 
 import { notFoundPageTemplate } from "./pages/404";
 import { serviceWorkPageTemplate } from "./pages/500";
@@ -13,8 +12,6 @@ import "./styles.scss";
 const setTemplate = (template) => {
   document.getElementById("root").innerHTML = template();
 };
-
-const compiledDefaultTemplate = Handlebars.compile(defaultTemplate);
 
 document.addEventListener("DOMContentLoaded", () => {
   switch (location.pathname) {
@@ -31,6 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     case "/registration":
       return setTemplate(registrationPageTemplate);
     default:
-      setTemplate(compiledDefaultTemplate);
+      setTemplate(template);
   }
 });

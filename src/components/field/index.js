@@ -1,12 +1,12 @@
 import Handlebars from "handlebars";
-import template from 'bundle-text:./template.hbs';
+import template from "./template.hbs";
 
-import { inputTemplate } from '../input'
+import { inputTemplate } from "../input";
 
 Handlebars.registerPartial("field", template);
 
 export const fieldTemplate = (props) => {
-  return Handlebars.compile(template)({
+  return template({
     ...props,
     input: inputTemplate,
   });

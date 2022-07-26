@@ -1,5 +1,5 @@
 import Handlebars from "handlebars";
-import template from "bundle-text:./template.hbs";
+import template from "./template.hbs";
 
 import { fieldTemplate } from "../../components/field";
 import { buttonTemplate } from "../../components/button";
@@ -98,7 +98,7 @@ const user = [
 Handlebars.registerPartial("account-page", template);
 
 export const accountPageTemplate = (props) => {
-  return Handlebars.compile(template)({
+  return template({
     ...props,
     field: fieldTemplate,
     button: buttonTemplate,
