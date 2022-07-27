@@ -3,9 +3,7 @@ const setEventListener = (element, typeEvent, handler, action) => {
     return;
   }
 
-  const eventListenerSetter = element[`${action}EventListener`];
-  
-  eventListenerSetter(typeEvent, handler);
+  element[`${action}EventListener`](typeEvent, handler);
 };
 
 export const addEventListener = (element, typeEvent, handler) => {
