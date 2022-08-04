@@ -1,0 +1,20 @@
+.button {
+  display: block;
+  padding: 1rem 3.2rem;
+  background-color: $button-background-color;
+  color: $button-text-color;
+  font-size: $button-font-size;
+  font-weight: $button-font-weight;
+  line-height: $button-font-line-height;
+  text-transform: uppercase;
+  border-color: transparent;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($button-background-color, 0.7);
+  }
+
+  &:active {
+    background-color: rgba($button-background-color, 0.4);
+  }
+}

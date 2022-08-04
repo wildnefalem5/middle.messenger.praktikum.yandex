@@ -1,0 +1,29 @@
+{
+  "name": "messenger.yandex",
+  "version": "1.0.0",
+  "description": "---",
+  "engines": {
+    "node": ">= 12.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "build": "parcel build index.html",
+    "dev": "parcel index.html -p 3000"
+  },
+  "targets": {
+    "web": {
+      "context": "browser",
+      "publicUrl": "./",
+      "distDir": "dist"
+    }
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.6.2",
+    "express": "4.18.1",
+    "handlebars": "4.7.7",
+    "parcel": "2.6.2"
+  },
+  "dependencies": {
+    "parcel-transformer-hbs": "1.0.4"
+  }
+}
