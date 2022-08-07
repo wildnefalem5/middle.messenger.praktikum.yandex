@@ -30,7 +30,7 @@
           ></path>
         </svg>
         <label class="account-page__avatar-file">
-            {{> input type="file" name="avatar" class="account-page__avatar-file-input" }}
+            {{> input type="file" name="avatar" className="account-page__avatar-file-input" }}
             Change avatar
         </label>
       </div>
@@ -47,8 +47,8 @@
           {{/each}}
         </ul>
         <div class="account-page__info-buttons">
-          {{> button text="Edit info" class="button account-page__info-button" attributes="data-tab-user-form-opener" }}
-          {{> button text="Change password" class="button account-page__info-button" attributes="data-tab-password-form-opener" }}
+          {{> button text="Edit info" className="button account-page__info-button" attributes="data-tab-user-form-opener" }}
+          {{> button text="Change password" className="button account-page__info-button" attributes="data-tab-password-form-opener" }}
         </div>
         <a class="account-page__logout" href="/login">
           Log out
@@ -57,23 +57,23 @@
 
       <form class="account-page__user-form hidden" data-tab="user-form" data-user-form>
         <div class="account-page__user-form-fields">
-          {{> field class="account-page__user-form-field" label="First name" placeholder="Enter your firstname" name="first_name" }}
-          {{> field class="account-page__user-form-field" label="Second name" placeholder="Enter your second name" name="second_name" }}
-          {{> field class="account-page__user-form-field" label="Login" placeholder="Enter your login" name="login" }}
-          {{> field class="account-page__user-form-field" label="Email" placeholder="Enter your email" name="email" }}
-          {{> field class="account-page__user-form-field" label="Phone" placeholder="Enter your phone" name="phone" }}
-          {{> field class="account-page__user-form-field" label="Password" placeholder="Enter your password" name="password" }}
+          {{> field className="account-page__user-form-field" label="First name" placeholder="Enter your firstname" name="first_name" }}
+          {{> field className="account-page__user-form-field" label="Second name" placeholder="Enter your second name" name="second_name" }}
+          {{> field className="account-page__user-form-field" label="Login" placeholder="Enter your login" name="login" }}
+          {{> field className="account-page__user-form-field" label="Email" placeholder="Enter your email" name="email" }}
+          {{> field className="account-page__user-form-field" label="Phone" placeholder="Enter your phone" name="phone" }}
+          {{> field className="account-page__user-form-field" label="Password" placeholder="Enter your password" name="password" }}
         </div>
-        {{> button type="submit" text="save" class="account-page__user-form-button" }}
+        {{> button type="submit" text="save" className="account-page__user-form-button" }}
       </form>
 
       <form class="account-page__password-form hidden" data-tab="password-form" data-password-form>
         <div class="account-page__password-form-fields">
-          {{> field class="account-page__password-form-field" label="Old password" placeholder="Enter your old password" name="oldPassword" }}
-          {{> field class="account-page__password-form-field" label="New password" placeholder="Enter your new password" name="newPassword" }}
-          {{> field class="account-page__password-form-field" label="Repeat new password" placeholder="Repeat your new password" }}
+          {{> field className="account-page__password-form-field" label="Old password" placeholder="Enter your old password" name="oldPassword" }}
+          {{> field className="account-page__password-form-field" label="New password" placeholder="Enter your new password" name="newPassword" }}
+          {{> field className="account-page__password-form-field" label="Repeat new password" placeholder="Repeat your new password" }}
         </div>
-        {{> button type="submit" text="save" class="account-page__password-form-button" }}
+        {{> button type="submit" text="save" className="account-page__password-form-button" }}
       </form>
     </div>
   </div>

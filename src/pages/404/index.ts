@@ -3,9 +3,11 @@ import template from "./template.hbs";
 
 import { pagePlaceholderTemplate } from "../../components/page-placeholder";
 
-Handlebars.registerPartial("chat", template);
+interface NotFoundPageProps {}
 
-export const chatPageTemplate = (props) => {
+Handlebars.registerPartial("page404", template);
+
+export const notFoundPageTemplate = (props: NotFoundPageProps) => {
   return template({
     ...props,
     pagePlaceholder: pagePlaceholderTemplate,

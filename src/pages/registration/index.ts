@@ -4,9 +4,11 @@ import template from "./template.hbs";
 import { fieldTemplate } from "../../components/field";
 import { buttonTemplate } from "../../components/button";
 
-Handlebars.registerPartial("loginPage", template);
+interface RegistrationPageProps {}
 
-export const loginPageTemplate = (props) => {
+Handlebars.registerPartial("registrationPage", template);
+
+export const registrationPageTemplate = (props: RegistrationPageProps) => {
   return template({
     ...props,
     field: fieldTemplate,
