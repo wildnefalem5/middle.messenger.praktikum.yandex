@@ -1,21 +1,17 @@
-import Handlebars from "handlebars";
+import { Button } from './../button/index';
 import template from "./template.hbs";
-
-import { buttonTemplate } from "../button";
+import Block from "../../utils/block";
 
 interface PagePlaceholderProps {
-  className?: string;
+  classList?: string;
   codeStatus: string;
   title: string;
   text: string;
-  buttonText: string;
+  button: Button;
 }
 
-Handlebars.registerPartial("pagePlaceholder", template);
-
-export const pagePlaceholderTemplate = (props: PagePlaceholderProps) => {
-  return template({
-    ...props,
-    button: buttonTemplate,
-  });
-};
+export class PagePlaceholder extends Block<PagePlaceholderProps> {
+  render() {
+    return this.compile(template, this._props);
+  }
+}

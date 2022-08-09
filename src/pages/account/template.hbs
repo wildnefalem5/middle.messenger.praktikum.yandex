@@ -1,4 +1,4 @@
-<account-page class="account-page">
+<div class="account-page">
   <div class="account-page__back-to-chat">
     <svg
       class="account-page__back-to-chat-arrow"
@@ -30,12 +30,12 @@
           ></path>
         </svg>
         <label class="account-page__avatar-file">
-            {{> input type="file" name="avatar" className="account-page__avatar-file-input" }}
+            <input type="file" name="avatar" className="account-page__avatar-file-input" />
             Change avatar
         </label>
       </div>
       
-      <div class="account-page__info" data-tab="user-info">
+      <div class="account-page__info">
         <ul class="account-page__info-list">
           {{#each user}}
             <li class="account-page__info-list-item">
@@ -47,15 +47,15 @@
           {{/each}}
         </ul>
         <div class="account-page__info-buttons">
-          {{> button text="Edit info" className="button account-page__info-button" attributes="data-tab-user-form-opener" }}
-          {{> button text="Change password" className="button account-page__info-button" attributes="data-tab-password-form-opener" }}
+          {{> button text="Edit info" className="button account-page__info-button" }}
+          {{> button text="Change password" className="button account-page__info-button" }}
         </div>
         <a class="account-page__logout" href="/login">
           Log out
         </a>
       </div>
 
-      <form class="account-page__user-form hidden" data-tab="user-form" data-user-form>
+      <form class="account-page__user-form hidden">
         <div class="account-page__user-form-fields">
           {{> field className="account-page__user-form-field" label="First name" placeholder="Enter your firstname" name="first_name" }}
           {{> field className="account-page__user-form-field" label="Second name" placeholder="Enter your second name" name="second_name" }}
@@ -67,7 +67,7 @@
         {{> button type="submit" text="save" className="account-page__user-form-button" }}
       </form>
 
-      <form class="account-page__password-form hidden" data-tab="password-form" data-password-form>
+      <form class="account-page__password-form hidden">
         <div class="account-page__password-form-fields">
           {{> field className="account-page__password-form-field" label="Old password" placeholder="Enter your old password" name="oldPassword" }}
           {{> field className="account-page__password-form-field" label="New password" placeholder="Enter your new password" name="newPassword" }}
@@ -77,4 +77,4 @@
       </form>
     </div>
   </div>
-</account-page>
+</div>

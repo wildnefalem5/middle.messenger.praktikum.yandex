@@ -1,15 +1,19 @@
 import Handlebars from "handlebars";
 import template from "./template.hbs";
+import Block from "../../utils/block";
 
 interface ButtonProps {
-  className?: string;
-  type?: string;
-  attributes?: string;
   text: string;
+  attr: {
+    class?: string;
+    type?: string;
+  };
 }
 
 Handlebars.registerPartial("button", template);
 
-export const buttonTemplate = ({ type = "button", ...rest }: ButtonProps) => {
-  return template({ type, ...rest });
-};
+export class Button extends Block<ButtonProps> {
+  render() {
+    return this.compile(template, this._props);
+  }
+}

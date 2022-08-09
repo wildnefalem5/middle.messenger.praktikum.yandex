@@ -1,4 +1,7 @@
-<div class="field {{ className }}">
-    <label class="field__label">{{ label }}</label>
-    {{> input placeholder=placeholder name=name type=type }}
-</div>
+<div class="field__label">{{label}}</div>
+<input
+  type="{{type}}"
+  class="input {{className}}"
+  placeholder="{{placeholder}}"
+  name="{{name}}"
+/>

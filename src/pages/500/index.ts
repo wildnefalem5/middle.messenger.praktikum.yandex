@@ -1,15 +1,30 @@
-import Handlebars from "handlebars";
+import "../../styles.scss";
 import template from "./template.hbs";
-
-import { pagePlaceholderTemplate } from "../../components/page-placeholder";
+import Block from "../../utils/block";
+import { renderTemplate } from "../../utils/render-template";
+import { PagePlaceholder } from "../../components/page-placeholder/index";
+import { Button } from "../../components/button/index";
 
 interface ServiceWorkPageProps {}
 
-Handlebars.registerPartial("page500", template);
+const button = new Button("button", {
+  text: "go to chat",
+  attr: {
+    class: "button page-placeholder__button",
+  },
+});
 
-export const serviceWorkPageTemplate = (props: ServiceWorkPageProps) => {
-  return template({
-    ...props,
-    pagePlaceholder: pagePlaceholderTemplate,
-  });
-};
+const pagePlaceholder = new PagePlaceholder("div", {
+  codeStatus: "500",
+  title: "Service work",
+  text: "Sorry, we working on some problem.",
+  button,
+});
+
+export class ServiceWorkPage extends Block<ServiceWorkPageProps> {
+  render() {
+    return this.compile(template, this._props);
+  }
+}
+
+renderTemplate("#root", pagePlaceholder);

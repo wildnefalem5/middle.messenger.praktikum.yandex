@@ -1,7 +1,5 @@
-import Handlebars from "handlebars";
 import template from "./template.hbs";
-
-import { inputTemplate } from "../input";
+import Block from "../../utils/block";
 
 interface FieldProps {
   className?: string;
@@ -11,11 +9,8 @@ interface FieldProps {
   label: string;
 }
 
-Handlebars.registerPartial("field", template);
-
-export const fieldTemplate = (props: FieldProps) => {
-  return template({
-    ...props,
-    input: inputTemplate,
-  });
-};
+export class Field extends Block<FieldProps> {
+  render() {
+    return this.compile(template, this._props);
+  }
+}
