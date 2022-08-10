@@ -1,15 +1,14 @@
-import Handlebars from "handlebars";
+import '../../styles.scss'
+import { renderTemplate } from "./../../utils/render-template";
 import template from "./template.hbs";
-
-import { pagePlaceholderTemplate } from "../../components/page-placeholder";
+import Block from "../../utils/block";
 
 interface ChatPageProps {}
 
-Handlebars.registerPartial("chat", template);
+export class ChatPage extends Block<ChatPageProps> {
+  render() {
+    return this.compile(template, this._props);
+  }
+}
 
-export const chatPageTemplate = (props: ChatPageProps) => {
-  return template({
-    ...props,
-    pagePlaceholder: pagePlaceholderTemplate,
-  });
-};
+renderTemplate("#root", new ChatPage("div", {}));
