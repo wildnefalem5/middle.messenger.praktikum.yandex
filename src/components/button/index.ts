@@ -8,6 +8,7 @@ interface ButtonProps {
     class?: string;
     type?: string;
   };
+  events?: any
 }
 
 Handlebars.registerPartial("button", template);
