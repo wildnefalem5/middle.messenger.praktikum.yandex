@@ -1,3 +1,4 @@
+import { showFormDataInConsole } from './../../utils/show-form-data-console';
 import "../../styles.scss";
 import { renderTemplate } from "./../../utils/render-template";
 import { Form } from "./../../components/form/index";
@@ -92,6 +93,13 @@ const registrationFormPage = new Form("form", {
   attr: {
     class: "registration-page__form",
   },
+  events: {
+    submit: (e) => {
+      e.preventDefault()
+
+      showFormDataInConsole(e.target)
+    }
+  }
 });
 
 export class RegistrationPage extends Block<RegistrationPageProps> {

@@ -1,3 +1,4 @@
+import { showFormDataInConsole } from './../../utils/show-form-data-console';
 import { getElements } from "./../../utils/get-elements";
 import { renderTemplate } from "./../../utils/render-template";
 import "../../styles.scss";
@@ -48,6 +49,13 @@ const loginPageForm = new Form("form", {
   attr: {
     class: "login-page__form",
   },
+  events: {
+    submit: (e) => {
+      e.preventDefault()
+
+      showFormDataInConsole(e.target)
+    }
+  }
 });
 
 export class LoginPage extends Block<LoginPageProps> {

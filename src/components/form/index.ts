@@ -8,6 +8,7 @@ interface FormProps {
   attr: {
     class?: string;
   };
+  events?: any;
 }
 
 export class Form extends Block<FormProps> {

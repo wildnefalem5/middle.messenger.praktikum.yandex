@@ -1,3 +1,4 @@
+import { showFormDataInConsole } from './../../utils/show-form-data-console';
 import "../../styles.scss";
 import { renderTemplate } from "./../../utils/render-template";
 import { Wrapper } from "./../../components/wrapper/index";
@@ -148,6 +149,13 @@ const userForm = new Form("form", {
   attr: {
     class: "account-page__user-form hidden",
   },
+  events: {
+    submit: (e) => {
+      e.preventDefault()
+
+      showFormDataInConsole(e.target)
+    }
+  }
 });
 
 const passwordFormSubmitButton = new Button("button", {
@@ -207,6 +215,13 @@ const passwordForm = new Form("form", {
   attr: {
     class: "account-page__password-form hidden",
   },
+  events: {
+    submit: (e) => {
+      e.preventDefault()
+
+      showFormDataInConsole(e.target)
+    }
+  }
 });
 
 export class RegistrationPage extends Block<AccountPageProps> {
