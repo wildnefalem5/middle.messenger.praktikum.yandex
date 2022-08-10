@@ -1,7 +1,7 @@
-import { getElements } from './../../utils/get-elements';
-import { renderTemplate } from './../../utils/render-template';
+import { getElements } from "./../../utils/get-elements";
+import { renderTemplate } from "./../../utils/render-template";
 import "../../styles.scss";
-import { Wrapper } from './../../components/wrapper/index';
+import { Wrapper } from "./../../components/wrapper/index";
 import { Form } from "./../../components/form/index";
 import { Field } from "./../../components/field/index";
 import template from "./template.hbs";
@@ -22,7 +22,7 @@ const emailField = new Field("label", {
   placeholder: "Enter your email",
   name: "email",
   attr: {
-    class: "login-page__form-field",
+    class: "field login-page__form-field",
   },
 });
 
@@ -31,12 +31,12 @@ const passwordField = new Field("label", {
   placeholder: "Enter your password",
   name: "password",
   attr: {
-    class: "login-page__form-field",
+    class: "field login-page__form-field",
   },
 });
 
 const fields = new Wrapper("div", {
-  nodes: getElements([emailField, passwordField]),
+  nodes: getElements({ emailField, passwordField }),
   attr: {
     class: "login-page__form-fields",
   },
@@ -56,7 +56,9 @@ export class LoginPage extends Block<LoginPageProps> {
   }
 }
 
-renderTemplate('#root', new LoginPage('div', {
-  loginPageForm
-}))
-
+renderTemplate(
+  "#root",
+  new LoginPage("div", {
+    loginPageForm,
+  })
+);
