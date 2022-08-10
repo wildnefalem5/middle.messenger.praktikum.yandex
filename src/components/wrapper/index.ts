@@ -1,17 +1,14 @@
 import template from "./template.hbs";
 import Block from "../../utils/block";
 
-interface FieldProps {
-  type?: string;
-  name?: string;
-  placeholder?: string;
-  label: string;
+interface WrapperProps {
+  nodes: any[];
   attr: {
     class?: string;
-  };
+  }
 }
 
-export class Field extends Block<FieldProps> {
+export class Wrapper extends Block<WrapperProps> {
   render() {
     return this.compile(template, this._props);
   }

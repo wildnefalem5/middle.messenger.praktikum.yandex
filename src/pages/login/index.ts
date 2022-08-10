@@ -1,17 +1,62 @@
-import Handlebars from "handlebars";
+import { getElements } from './../../utils/get-elements';
+import { renderTemplate } from './../../utils/render-template';
+import "../../styles.scss";
+import { Wrapper } from './../../components/wrapper/index';
+import { Form } from "./../../components/form/index";
+import { Field } from "./../../components/field/index";
 import template from "./template.hbs";
-
-import { fieldTemplate } from "../../components/field";
-import { buttonTemplate } from "../../components/button";
+import { Button } from "../../components/button/index";
+import Block from "../../utils/block";
 
 interface LoginPageProps {}
 
-Handlebars.registerPartial("loginPage", template);
+const button = new Button("button", {
+  text: "sign in",
+  attr: {
+    class: "button login-page__form-button",
+  },
+});
 
-export const loginPageTemplate = (props: LoginPageProps) => {
-  return template({
-    ...props,
-    field: fieldTemplate,
-    button: buttonTemplate,
-  });
-};
+const emailField = new Field("label", {
+  label: "Email",
+  placeholder: "Enter your email",
+  name: "email",
+  attr: {
+    class: "login-page__form-field",
+  },
+});
+
+const passwordField = new Field("label", {
+  label: "Email",
+  placeholder: "Enter your password",
+  name: "password",
+  attr: {
+    class: "login-page__form-field",
+  },
+});
+
+const fields = new Wrapper("div", {
+  nodes: getElements([emailField, passwordField]),
+  attr: {
+    class: "login-page__form-fields",
+  },
+});
+
+const loginPageForm = new Form("form", {
+  fields,
+  button,
+  attr: {
+    class: "login-page__form",
+  },
+});
+
+export class LoginPage extends Block<LoginPageProps> {
+  render() {
+    return this.compile(template, this._props);
+  }
+}
+
+renderTemplate('#root', new LoginPage('div', {
+  loginPageForm
+}))
+
