@@ -11,7 +11,9 @@ interface PasswordFormProps {
   attr: {
     class?: string;
   };
-  events?: any;
+  events?: {
+    submit?: Function;
+  }
 }
 
 export class PasswordForm extends Block<PasswordFormProps> {

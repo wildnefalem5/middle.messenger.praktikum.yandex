@@ -8,7 +8,9 @@ interface ButtonProps {
     class?: string;
     type?: string;
   };
-  events?: any
+  events?: {
+    click?: Function;
+  }
 }
 
 Handlebars.registerPartial("button", template);

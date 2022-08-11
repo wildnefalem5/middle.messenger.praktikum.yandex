@@ -14,7 +14,9 @@ interface UserFormProps {
   attr: {
     class?: string;
   };
-  events?: any;
+  events?: {
+    submit?: Function;
+  }
 }
 
 

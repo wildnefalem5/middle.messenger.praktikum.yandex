@@ -1,15 +1,18 @@
+import { Field } from './../../../../components/field/index';
 import { Button } from '../../../../components/button';
 import template from "./template.hbs";
 import Block from "../../../../utils/block";
 
 interface LoginFormProps {
-  emailField: any;
-  passwordField: any;
+  emailField: Field;
+  passwordField: Field;
   button: Button;
   attr: {
     class?: string;
   };
-  events?: any;
+  events?: {
+    submit?: Function;
+  }
 }
 
 export class LoginForm extends Block<LoginFormProps> {

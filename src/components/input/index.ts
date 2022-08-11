@@ -8,7 +8,10 @@ interface InputProps {
   attr?: {
     class?: string;
   };
-  events?: any;
+  events?: {
+    blur?: Function;
+    focus?: Function;
+  }
 }
 
 export class Input extends Block<InputProps> {

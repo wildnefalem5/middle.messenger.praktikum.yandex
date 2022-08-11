@@ -8,7 +8,6 @@ interface FieldProps {
   attr: {
     class?: string;
   };
-  events?: any;
 }
 
 export class Field extends Block<FieldProps> {
