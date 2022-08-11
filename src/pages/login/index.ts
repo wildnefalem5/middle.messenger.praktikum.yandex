@@ -1,13 +1,13 @@
-import { showFormDataInConsole } from './../../utils/show-form-data-console';
-import { getElements } from "./../../utils/get-elements";
+import { emailValidate, passwordValidate } from "./../../utils/validate";
+import { showFormDataInConsole } from "./../../utils/show-form-data-console";
 import { renderTemplate } from "./../../utils/render-template";
 import "../../styles.scss";
-import { Wrapper } from "./../../components/wrapper/index";
-import { Form } from "./../../components/form/index";
 import { Field } from "./../../components/field/index";
 import template from "./template.hbs";
 import { Button } from "../../components/button/index";
 import Block from "../../utils/block";
+import { LoginForm } from "./components/login-form";
+import { Input } from "../../components/input";
 
 interface LoginPageProps {}
 
@@ -20,42 +20,56 @@ const button = new Button("button", {
 
 const emailField = new Field("label", {
   label: "Email",
-  placeholder: "Enter your email",
-  name: "email",
   attr: {
     class: "field login-page__form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your email",
+    name: "email",
+    type: "email",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          emailValidate(e.target.value) ? "" : "Wrong email"
+        );
+      },
+    },
+  }),
 });
 
 const passwordField = new Field("label", {
-  label: "Email",
-  placeholder: "Enter your password",
-  name: "password",
+  label: "Password",
   attr: {
     class: "field login-page__form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your password",
+    name: "password",
+    type: "password",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          passwordValidate(e.target.value) ? "" : "Wrong password"
+        );
+      },
+    },
+  }),
 });
 
-const fields = new Wrapper("div", {
-  nodes: getElements({ emailField, passwordField }),
-  attr: {
-    class: "login-page__form-fields",
-  },
-});
-
-const loginPageForm = new Form("form", {
-  fields,
+const loginForm = new LoginForm("form", {
+  emailField,
+  passwordField,
   button,
   attr: {
     class: "login-page__form",
   },
   events: {
     submit: (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      showFormDataInConsole(e.target)
-    }
-  }
+      showFormDataInConsole(e.target);
+    },
+  },
 });
 
 export class LoginPage extends Block<LoginPageProps> {
@@ -67,6 +81,6 @@ export class LoginPage extends Block<LoginPageProps> {
 renderTemplate(
   "#root",
   new LoginPage("div", {
-    loginPageForm,
+    loginForm,
   })
 );

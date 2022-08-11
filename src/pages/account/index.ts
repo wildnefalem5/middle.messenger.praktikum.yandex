@@ -1,13 +1,14 @@
-import { showFormDataInConsole } from './../../utils/show-form-data-console';
+import { nameValidate, loginValidate, emailValidate, phoneValidate, passwordValidate } from './../../utils/validate';
+import { UserForm } from "./components/user-form/index";
+import { PasswordForm } from "./components/password-form/index";
+import { showFormDataInConsole } from "./../../utils/show-form-data-console";
 import "../../styles.scss";
 import { renderTemplate } from "./../../utils/render-template";
-import { Wrapper } from "./../../components/wrapper/index";
-import { Form } from "./../../components/form/index";
-import { getElements } from "./../../utils/get-elements";
 import { Field } from "./../../components/field/index";
 import { Button } from "./../../components/button/index";
 import template from "./template.hbs";
 import Block from "../../utils/block";
+import { Input } from "../../components/input";
 
 interface User {
   field: string;
@@ -25,7 +26,7 @@ const users: User[] = [
   { field: "Phone", value: "+7 (777) 777 77 77" },
 ];
 
-const toggleFormVisible = (form) => {
+export const toggleFormVisible = (form) => {
   const formNode = form.getContent();
   const isFormNodeHidden = formNode.classList.contains("hidden");
   const info = document.getElementById("AccountPageInfo");
@@ -77,85 +78,142 @@ const userFormSubmitButton = new Button("button", {
 
 const userFormFirstNameField = new Field("label", {
   label: "First name",
-  placeholder: "Enter your first name",
-  name: "first_name",
+
   attr: {
     class: "field account-page__user-form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your first name",
+    name: "first_name",
+    type: "text",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          nameValidate(e.target.value) ? "" : "Wrong first name"
+        );
+      },
+    },
+  }),
 });
 
 const userFormSecondNameField = new Field("label", {
   label: "Second name",
-  placeholder: "Enter your second name",
-  name: "second_name",
+
   attr: {
     class: "field account-page__user-form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your second name",
+    name: "second_name",
+    type: "text",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          nameValidate(e.target.value) ? "" : "Wrong second name"
+        );
+      },
+    },
+  }),
 });
 
 const userFormLoginField = new Field("label", {
   label: "Login",
-  placeholder: "Enter your login",
-  name: "login",
+
   attr: {
     class: "field account-page__user-form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your login",
+    name: "login",
+    type: "text",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          loginValidate(e.target.value) ? "" : "Wrong login"
+        );
+      },
+    },
+  }),
 });
 
 const userFormEmailField = new Field("label", {
   label: "Email",
-  placeholder: "Enter your email",
-  name: "email",
+
   attr: {
     class: "field account-page__user-form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your email",
+    name: "email",
+    type: "email",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          emailValidate(e.target.value) ? "" : "Wrong email"
+        );
+      },
+    },
+  }),
 });
 
 const userFormPhoneField = new Field("label", {
   label: "Phone",
-  placeholder: "Enter your phone",
-  name: "phone",
+
   attr: {
     class: "field account-page__user-form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your phone",
+    name: "phone",
+    type: "text",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          phoneValidate(e.target.value) ? "" : "Wrong phone"
+        );
+      },
+    },
+  }),
 });
 
 const userFormPasswordField = new Field("label", {
   label: "Password",
-  placeholder: "Enter your password",
-  name: "password",
+
   attr: {
     class: "field account-page__user-form-field",
   },
-});
-
-const userFormFields = new Wrapper("div", {
-  nodes: getElements({
-    userFormFirstNameField,
-    userFormSecondNameField,
-    userFormLoginField,
-    userFormEmailField,
-    userFormPhoneField,
-    userFormPasswordField,
+  input: new Input("div", {
+    placeholder: "Enter your password",
+    name: "password",
+    type: "password",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          passwordValidate(e.target.value) ? "" : "Wrong password"
+        );
+      },
+    },
   }),
-  attr: {
-    class: "account-page__user-form-fields",
-  },
 });
 
-const userForm = new Form("form", {
-  fields: userFormFields,
+const userForm = new UserForm("form", {
+  firstNameField: userFormFirstNameField,
+  secondNameField: userFormSecondNameField,
+  loginField: userFormLoginField,
+  emailField: userFormEmailField,
+  phoneField: userFormPhoneField,
+  passwordField: userFormPasswordField,
   button: userFormSubmitButton,
   attr: {
     class: "account-page__user-form hidden",
   },
   events: {
     submit: (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      showFormDataInConsole(e.target)
-    }
-  }
+      showFormDataInConsole(e.target);
+    },
+  },
 });
 
 const passwordFormSubmitButton = new Button("button", {
@@ -173,55 +231,79 @@ const passwordFormSubmitButton = new Button("button", {
 
 const passwordFormOldPasswordField = new Field("label", {
   label: "Old password",
-  placeholder: "Enter your old password",
-  name: "oldPassword",
+
   attr: {
     class: "field account-page__password-form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your old password",
+    name: "oldPassword",
+    type: "password",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          passwordValidate(e.target.value) ? "" : "Wrong old password"
+        );
+      },
+    },
+  }),
 });
 
 const passwordFormNewPasswordField = new Field("label", {
   label: "New password",
-  placeholder: "Enter your new password",
-  name: "newPassword",
+
   attr: {
     class: "field account-page__password-form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your new password", 
+    name: "newPassword",
+    type: "password",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          passwordValidate(e.target.value) ? "" : "Wrong new password"
+        );
+      },
+    },
+  }),
 });
 
 const passwordFormRepeatPasswordField = new Field("label", {
   label: "Repeat new password",
-  placeholder: "Repeat your new password",
-  name: "repeat_newPassword",
+
   attr: {
     class: "field account-page__password-form-field",
   },
-});
-
-const passwordFormFields = new Wrapper("div", {
-  nodes: getElements({
-    passwordFormOldPasswordField,
-    passwordFormNewPasswordField,
-    passwordFormRepeatPasswordField,
+  input: new Input("div", {
+    placeholder: "Repeat your new password",
+    name: "repeat_newPassword",
+    type: "password",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          passwordValidate(e.target.value) ? "" : "Wrong repeated password"
+        );
+      },
+    },
   }),
-  attr: {
-    class: "account-page__user-form-fields",
-  },
 });
 
-const passwordForm = new Form("form", {
-  fields: passwordFormFields,
+const passwordForm = new PasswordForm("form", {
+  oldPasswordField: passwordFormOldPasswordField,
+  newPasswordField: passwordFormNewPasswordField,
+  repeatedNewPasswordField: passwordFormRepeatPasswordField,
   button: passwordFormSubmitButton,
   attr: {
     class: "account-page__password-form hidden",
   },
   events: {
     submit: (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      showFormDataInConsole(e.target)
-    }
-  }
+      showFormDataInConsole(e.target);
+    },
+  },
 });
 
 export class RegistrationPage extends Block<AccountPageProps> {

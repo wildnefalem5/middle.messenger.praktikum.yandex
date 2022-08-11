@@ -1,14 +1,20 @@
-import { showFormDataInConsole } from './../../utils/show-form-data-console';
+import {
+  nameValidate,
+  loginValidate,
+  emailValidate,
+  phoneValidate,
+  passwordValidate,
+} from "./../../utils/validate";
+import { RegistrationForm } from "./components/registration-form/index";
+import { showFormDataInConsole } from "./../../utils/show-form-data-console";
 import "../../styles.scss";
 import { renderTemplate } from "./../../utils/render-template";
-import { Form } from "./../../components/form/index";
-import { getElements } from "./../../utils/get-elements";
-import { Wrapper } from "./../../components/wrapper/index";
 import { Field } from "./../../components/field/index";
 import { Button } from "./../../components/button/index";
 
 import template from "./template.hbs";
 import Block from "../../utils/block";
+import { Input } from "../../components/input";
 
 interface RegistrationPageProps {}
 
@@ -21,85 +27,140 @@ const button = new Button("button", {
 
 const firstNameField = new Field("label", {
   label: "First name",
-  placeholder: "Enter your first name",
-  name: "first_name",
+
   attr: {
     class: "field registration-page__form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your first name",
+    name: "first_name",
+    type: "text",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          nameValidate(e.target.value) ? "" : "Wrong first name"
+        );
+      },
+    },
+  }),
 });
 
 const secondNameField = new Field("label", {
   label: "Second name",
-  placeholder: "Enter your second name",
-  name: "second_name",
+
   attr: {
     class: "field registration-page__form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your second name",
+    name: "second_name",
+    type: "text",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          nameValidate(e.target.value) ? "" : "Wrong second name"
+        );
+      },
+    },
+  }),
 });
 
 const loginField = new Field("label", {
   label: "Login",
-  placeholder: "Enter your login",
-  name: "login",
   attr: {
     class: "field registration-page__form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your login",
+    name: "login",
+    type: "text",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          loginValidate(e.target.value) ? "" : "Wrong login"
+        );
+      },
+    },
+  }),
 });
 
 const emailField = new Field("label", {
   label: "Email",
-  placeholder: "Enter your email",
-  name: "email",
   attr: {
     class: "field registration-page__form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your email",
+    name: "email",
+    type: "email",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          emailValidate(e.target.value) ? "" : "Wrong email"
+        );
+      },
+    },
+  }),
 });
 
 const phoneField = new Field("label", {
   label: "Phone",
-  placeholder: "Enter your phone",
-  name: "phone",
+
   attr: {
     class: "field registration-page__form-field",
   },
+  input: new Input("div", {
+    placeholder: "Enter your phone",
+    name: "phone",
+    type: "text",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          phoneValidate(e.target.value) ? "" : "Wrong phone"
+        );
+      },
+    },
+  }),
 });
 
 const passwordField = new Field("label", {
   label: "Password",
-  placeholder: "Enter your password",
-  name: "password",
+
   attr: {
     class: "field registration-page__form-field",
   },
-});
-
-const fields = new Wrapper("div", {
-  nodes: getElements({
-    firstNameField,
-    secondNameField,
-    loginField,
-    emailField,
-    phoneField,
-    passwordField,
+  input: new Input("div", {
+    placeholder: "Enter your password",
+    name: "password",
+    type: "password",
+    events: {
+      blur: (e) => {
+        e.target.setCustomValidity(
+          passwordValidate(e.target.value) ? "" : "Wrong password"
+        );
+      },
+    },
   }),
-  attr: {
-    class: "registration-page__form-fields",
-  },
 });
 
-const registrationFormPage = new Form("form", {
-  fields,
+const registrationForm = new RegistrationForm("form", {
+  firstNameField,
+  secondNameField,
+  loginField,
+  emailField,
+  phoneField,
+  passwordField,
   button,
   attr: {
     class: "registration-page__form",
   },
   events: {
     submit: (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      showFormDataInConsole(e.target)
-    }
-  }
+      showFormDataInConsole(e.target);
+    },
+  },
 });
 
 export class RegistrationPage extends Block<RegistrationPageProps> {
@@ -111,6 +172,6 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
 renderTemplate(
   "#root",
   new RegistrationPage("div", {
-    registrationFormPage,
+    registrationForm,
   })
 );

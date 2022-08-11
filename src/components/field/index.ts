@@ -1,14 +1,14 @@
+import { Input } from './../input/index';
 import template from "./template.hbs";
 import Block from "../../utils/block";
 
 interface FieldProps {
-  type?: string;
-  name?: string;
-  placeholder?: string;
   label: string;
+  input: Input;
   attr: {
     class?: string;
   };
+  events?: any;
 }
 
 export class Field extends Block<FieldProps> {
