@@ -18,6 +18,11 @@ import { Input } from "../../components/input";
 
 interface RegistrationPageProps {}
 
+interface EventType {
+  preventDefault: Function; 
+  target: HTMLFormElement; 
+}
+
 const button = new Button("button", {
   text: "sign up",
   attr: {
@@ -36,7 +41,7 @@ const firstNameField = new Field("label", {
     name: "first_name",
     type: "text",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           nameValidate(e.target.value) ? "" : "Wrong first name"
         );
@@ -56,7 +61,7 @@ const secondNameField = new Field("label", {
     name: "second_name",
     type: "text",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           nameValidate(e.target.value) ? "" : "Wrong second name"
         );
@@ -75,7 +80,7 @@ const loginField = new Field("label", {
     name: "login",
     type: "text",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           loginValidate(e.target.value) ? "" : "Wrong login"
         );
@@ -94,7 +99,7 @@ const emailField = new Field("label", {
     name: "email",
     type: "email",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           emailValidate(e.target.value) ? "" : "Wrong email"
         );
@@ -114,7 +119,7 @@ const phoneField = new Field("label", {
     name: "phone",
     type: "text",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           phoneValidate(e.target.value) ? "" : "Wrong phone"
         );
@@ -134,7 +139,7 @@ const passwordField = new Field("label", {
     name: "password",
     type: "password",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           passwordValidate(e.target.value) ? "" : "Wrong password"
         );
@@ -155,7 +160,7 @@ const registrationForm = new RegistrationForm("form", {
     class: "registration-page__form",
   },
   events: {
-    submit: (e) => {
+    submit: (e: EventType) => {
       e.preventDefault();
 
       showFormDataInConsole(e.target);

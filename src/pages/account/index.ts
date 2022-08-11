@@ -1,4 +1,10 @@
-import { nameValidate, loginValidate, emailValidate, phoneValidate, passwordValidate } from './../../utils/validate';
+import {
+  nameValidate,
+  loginValidate,
+  emailValidate,
+  phoneValidate,
+  passwordValidate,
+} from "./../../utils/validate";
 import { UserForm } from "./components/user-form/index";
 import { PasswordForm } from "./components/password-form/index";
 import { showFormDataInConsole } from "./../../utils/show-form-data-console";
@@ -17,6 +23,11 @@ interface User {
 
 interface AccountPageProps {}
 
+interface EventType {
+  preventDefault: Function; 
+  target: HTMLFormElement; 
+}
+
 const users: User[] = [
   { field: "Email", value: "wildnefalem5@gmail.com" },
   { field: "Login", value: "securityOleg" },
@@ -26,7 +37,7 @@ const users: User[] = [
   { field: "Phone", value: "+7 (777) 777 77 77" },
 ];
 
-export const toggleFormVisible = (form) => {
+export const toggleFormVisible = (form: PasswordForm | UserForm) => {
   const formNode = form.getContent();
   const isFormNodeHidden = formNode.classList.contains("hidden");
   const info = document.getElementById("AccountPageInfo");
@@ -87,7 +98,7 @@ const userFormFirstNameField = new Field("label", {
     name: "first_name",
     type: "text",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           nameValidate(e.target.value) ? "" : "Wrong first name"
         );
@@ -107,7 +118,7 @@ const userFormSecondNameField = new Field("label", {
     name: "second_name",
     type: "text",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           nameValidate(e.target.value) ? "" : "Wrong second name"
         );
@@ -127,7 +138,7 @@ const userFormLoginField = new Field("label", {
     name: "login",
     type: "text",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           loginValidate(e.target.value) ? "" : "Wrong login"
         );
@@ -147,7 +158,7 @@ const userFormEmailField = new Field("label", {
     name: "email",
     type: "email",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           emailValidate(e.target.value) ? "" : "Wrong email"
         );
@@ -167,7 +178,7 @@ const userFormPhoneField = new Field("label", {
     name: "phone",
     type: "text",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           phoneValidate(e.target.value) ? "" : "Wrong phone"
         );
@@ -187,7 +198,7 @@ const userFormPasswordField = new Field("label", {
     name: "password",
     type: "password",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           passwordValidate(e.target.value) ? "" : "Wrong password"
         );
@@ -208,7 +219,7 @@ const userForm = new UserForm("form", {
     class: "account-page__user-form hidden",
   },
   events: {
-    submit: (e) => {
+    submit: (e: EventType) => {
       e.preventDefault();
 
       showFormDataInConsole(e.target);
@@ -240,7 +251,7 @@ const passwordFormOldPasswordField = new Field("label", {
     name: "oldPassword",
     type: "password",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           passwordValidate(e.target.value) ? "" : "Wrong old password"
         );
@@ -256,11 +267,11 @@ const passwordFormNewPasswordField = new Field("label", {
     class: "field account-page__password-form-field",
   },
   input: new Input("div", {
-    placeholder: "Enter your new password", 
+    placeholder: "Enter your new password",
     name: "newPassword",
     type: "password",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           passwordValidate(e.target.value) ? "" : "Wrong new password"
         );
@@ -280,7 +291,7 @@ const passwordFormRepeatPasswordField = new Field("label", {
     name: "repeat_newPassword",
     type: "password",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           passwordValidate(e.target.value) ? "" : "Wrong repeated password"
         );
@@ -298,7 +309,7 @@ const passwordForm = new PasswordForm("form", {
     class: "account-page__password-form hidden",
   },
   events: {
-    submit: (e) => {
+    submit: (e: EventType) => {
       e.preventDefault();
 
       showFormDataInConsole(e.target);

@@ -11,6 +11,11 @@ import { Input } from "../../components/input";
 
 interface LoginPageProps {}
 
+interface EventType {
+  preventDefault: Function; 
+  target: HTMLFormElement; 
+}
+
 const button = new Button("button", {
   text: "sign in",
   attr: {
@@ -28,7 +33,7 @@ const emailField = new Field("label", {
     name: "email",
     type: "email",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           emailValidate(e.target.value) ? "" : "Wrong email"
         );
@@ -47,7 +52,7 @@ const passwordField = new Field("label", {
     name: "password",
     type: "password",
     events: {
-      blur: (e) => {
+      blur: (e: EventType) => {
         e.target.setCustomValidity(
           passwordValidate(e.target.value) ? "" : "Wrong password"
         );
@@ -64,7 +69,7 @@ const loginForm = new LoginForm("form", {
     class: "login-page__form",
   },
   events: {
-    submit: (e) => {
+    submit: (e: EventType) => {
       e.preventDefault();
 
       showFormDataInConsole(e.target);

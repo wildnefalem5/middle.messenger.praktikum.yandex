@@ -1,4 +1,3 @@
-import Handlebars from "handlebars";
 import template from "./template.hbs";
 import Block from "../../utils/block";
 
@@ -12,8 +11,6 @@ interface ButtonProps {
     click?: Function;
   }
 }
-
-Handlebars.registerPartial("button", template);
 
 export class Button extends Block<ButtonProps> {
   render() {
