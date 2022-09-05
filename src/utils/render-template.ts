@@ -5,7 +5,7 @@ export const renderTemplate = (query: string, block: Block<any>) => {
 
   if (root) {
     root.appendChild(block.getContent());
-    console.log(root, block.getContent())
+
     block.dispatchComponentDidMount();
 
     return root;

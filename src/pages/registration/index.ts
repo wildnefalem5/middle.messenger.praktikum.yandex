@@ -8,7 +8,6 @@ import {
 import { RegistrationForm } from "./components/registration-form/index";
 import { showFormDataInConsole } from "./../../utils/show-form-data-console";
 import "../../styles.scss";
-import { renderTemplate } from "./../../utils/render-template";
 import { Field } from "./../../components/field/index";
 import { Button } from "./../../components/button/index";
 
@@ -19,8 +18,8 @@ import { Input } from "../../components/input";
 interface RegistrationPageProps {}
 
 interface EventType {
-  preventDefault: Function; 
-  target: HTMLFormElement; 
+  preventDefault: Function;
+  target: HTMLFormElement;
 }
 
 const button = new Button("button", {
@@ -168,15 +167,12 @@ const registrationForm = new RegistrationForm("form", {
   },
 });
 
-export class RegistrationPage extends Block<RegistrationPageProps> {
+export class RegistrationPageComponent extends Block<RegistrationPageProps> {
   render() {
     return this.compile(template, this._props);
   }
 }
 
-renderTemplate(
-  "#root",
-  new RegistrationPage("div", {
-    registrationForm,
-  })
-);
+export const RegistrationPage = new RegistrationPageComponent("div", {
+  registrationForm,
+});

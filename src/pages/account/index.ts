@@ -1,3 +1,4 @@
+import "../../styles.scss";
 import {
   nameValidate,
   loginValidate,
@@ -8,8 +9,6 @@ import {
 import { UserForm } from "./components/user-form/index";
 import { PasswordForm } from "./components/password-form/index";
 import { showFormDataInConsole } from "./../../utils/show-form-data-console";
-import "../../styles.scss";
-import { renderTemplate } from "./../../utils/render-template";
 import { Field } from "./../../components/field/index";
 import { Button } from "./../../components/button/index";
 import template from "./template.hbs";
@@ -24,8 +23,8 @@ interface User {
 interface AccountPageProps {}
 
 interface EventType {
-  preventDefault: Function; 
-  target: HTMLFormElement; 
+  preventDefault: Function;
+  target: HTMLFormElement;
 }
 
 const users: User[] = [
@@ -317,19 +316,16 @@ const passwordForm = new PasswordForm("form", {
   },
 });
 
-export class RegistrationPage extends Block<AccountPageProps> {
+export class AccountPageComponent extends Block<AccountPageProps> {
   render() {
     return this.compile(template, this._props);
   }
 }
 
-renderTemplate(
-  "#root",
-  new RegistrationPage("div", {
-    userForm,
-    passwordForm,
-    users,
-    editInfoButton,
-    changePasswordButton,
-  })
-);
+export const AccountPage = new AccountPageComponent("div", {
+  userForm,
+  passwordForm,
+  users,
+  editInfoButton,
+  changePasswordButton,
+});

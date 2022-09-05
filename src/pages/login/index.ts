@@ -1,6 +1,5 @@
 import { emailValidate, passwordValidate } from "./../../utils/validate";
 import { showFormDataInConsole } from "./../../utils/show-form-data-console";
-import { renderTemplate } from "./../../utils/render-template";
 import "../../styles.scss";
 import { Field } from "./../../components/field/index";
 import template from "./template.hbs";
@@ -12,8 +11,8 @@ import { Input } from "../../components/input";
 interface LoginPageProps {}
 
 interface EventType {
-  preventDefault: Function; 
-  target: HTMLFormElement; 
+  preventDefault: Function;
+  target: HTMLFormElement;
 }
 
 const button = new Button("button", {
@@ -77,15 +76,12 @@ const loginForm = new LoginForm("form", {
   },
 });
 
-export class LoginPage extends Block<LoginPageProps> {
+export class LoginPageComponent extends Block<LoginPageProps> {
   render() {
     return this.compile(template, this._props);
   }
 }
 
-renderTemplate(
-  "#root",
-  new LoginPage("div", {
-    loginForm,
-  })
-);
+export const LoginPage = new LoginPageComponent("div", {
+  loginForm,
+});
