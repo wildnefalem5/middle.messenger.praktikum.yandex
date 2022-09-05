@@ -20,4 +20,8 @@
     border-color: $primary-color;
     outline: none;
   }
+
+  &:invalid {
+    border-color: $red-color;
+  }
 }
