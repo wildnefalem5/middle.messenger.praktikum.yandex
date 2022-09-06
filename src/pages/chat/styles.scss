@@ -15,23 +15,24 @@
 
     &-header {
       height: 4rem;
-      border: 1px solid $border-color;
     }
 
     &-messages {
       flex: 1;
-      border: 1px solid $border-color;
+      border-top: 1px solid $border-color;
+      border-bottom: 1px solid $border-color;
     }
 
     &-footer {
     }
 
     &-form {
-
-        &-input {
-            height: 30rem;
-            width: 100%;
-        }
+      &-input {
+        padding: 2.4rem;
+        height: 30rem;
+        width: 100%;
+        border: none;
+      }
     }
   }
 }

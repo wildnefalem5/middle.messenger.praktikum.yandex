@@ -5,7 +5,7 @@ export enum METHODS {
   DELETE = "DELETE",
 }
 
-interface IRequestOptions {
+export interface IRequestOptions {
   method?: string;
   retries?: number;
   data?: Record<string, string | number | Array<string | number>>;
@@ -13,25 +13,25 @@ interface IRequestOptions {
   headers?: Record<string, string>;
 }
 
-class HTTPTransport {
+export class HTTPTransport {
   get = (url: string, options: IRequestOptions = {}) => {
     const preparedUrl = options.data
       ? `${url}${queryStringify(options.data)}`
       : url;
 
-    this.request(preparedUrl, { ...options, method: METHODS.GET });
+    return this.request(preparedUrl, { ...options, method: METHODS.GET });
   };
 
   post = (url: string, options: IRequestOptions = {}) => {
-    this.request(url, { ...options, method: METHODS.POST });
+    return this.request(url, { ...options, method: METHODS.POST });
   };
 
   put = (url: string, options: IRequestOptions = {}) => {
-    this.request(url, { ...options, method: METHODS.PUT });
+    return this.request(url, { ...options, method: METHODS.PUT });
   };
 
   delete = (url: string, options: IRequestOptions = {}) => {
-    this.request(url, { ...options, method: METHODS.DELETE });
+    return this.request(url, { ...options, method: METHODS.DELETE });
   };
 
   // eslint-disable-next-line class-methods-use-this
@@ -69,4 +69,3 @@ class HTTPTransport {
     });
   }
 }
-export { HTTPTransport };
