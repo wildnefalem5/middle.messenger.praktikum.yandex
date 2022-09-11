@@ -16,11 +16,14 @@ npm run dev
 - npm run dev - запускает <code>dev</code> версию
 - npm run build - собирает проект в директорию <code>dist</code>
 - npm run start - запуск <code>express</code> с раздачей статики <code>dist</code> 
+- npm run test - запуск тестов
 
 ### Прочее
 [Ссылка на пул реквест 1-го спринта](https://github.com/wildnefalem5/middle.messenger.praktikum.yandex/pull/2)
 
 [Ссылка на пул реквест 2-го спринта](https://github.com/wildnefalem5/middle.messenger.praktikum.yandex/pull/3)
+
+[Ссылка на пул реквест 3-го спринта](https://github.com/wildnefalem5/middle.messenger.praktikum.yandex/pull/4)
 
 [Ссылка на Netlify](https://sparkly-crisp-93f099.netlify.app/)
 
