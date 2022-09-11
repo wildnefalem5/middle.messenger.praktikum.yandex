@@ -1,3 +1,7 @@
+import { AvatarForm } from "./components/avatar-form/index";
+import { StoreEvents, User } from "./../../utils/store";
+import { AuthController } from "./../../controller/auth-controller";
+import { Router } from "./../../utils/router";
 import "../../styles.scss";
 import {
   nameValidate,
@@ -8,33 +12,22 @@ import {
 } from "./../../utils/validate";
 import { UserForm } from "./components/user-form/index";
 import { PasswordForm } from "./components/password-form/index";
-import { showFormDataInConsole } from "./../../utils/show-form-data-console";
+import { getDataFromForm } from "./../../utils/show-form-data-console";
 import { Field } from "./../../components/field/index";
 import { Button } from "./../../components/button/index";
 import template from "./template.hbs";
 import Block from "../../utils/block";
 import { Input } from "../../components/input";
+import { UserController } from "../../controller/user-controller";
 
-interface User {
-  field: string;
-  value: string;
+interface AccountPageProps {
+  user?: User;
 }
-
-interface AccountPageProps {}
 
 interface EventType {
   preventDefault: Function;
   target: HTMLFormElement;
 }
-
-const users: User[] = [
-  { field: "Email", value: "wildnefalem5@gmail.com" },
-  { field: "Login", value: "securityOleg" },
-  { field: "First name", value: "Oleg" },
-  { field: "Second name", value: "Olegov" },
-  { field: "Chat name", value: "Oleg" },
-  { field: "Phone", value: "+7 (777) 777 77 77" },
-];
 
 export const toggleFormVisible = (form: PasswordForm | UserForm) => {
   const formNode = form.getContent();
@@ -86,64 +79,103 @@ const userFormSubmitButton = new Button("button", {
   },
 });
 
+const userFormFirstNameInput = new Input("div", {
+  placeholder: "Enter your first name",
+  name: "first_name",
+  type: "text",
+  events: {
+    blur: (e: EventType) => {
+      e.target.setCustomValidity(
+        nameValidate(e.target.value) ? "" : "Wrong first name"
+      );
+    },
+  },
+});
+
 const userFormFirstNameField = new Field("label", {
   label: "First name",
-
   attr: {
     class: "field account-page__user-form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your first name",
-    name: "first_name",
-    type: "text",
-    events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          nameValidate(e.target.value) ? "" : "Wrong first name"
-        );
-      },
+  input: userFormFirstNameInput,
+});
+
+const userFormSecondNameInput = new Input("div", {
+  placeholder: "Enter your second name",
+  name: "second_name",
+  type: "text",
+  events: {
+    blur: (e: EventType) => {
+      e.target.setCustomValidity(
+        nameValidate(e.target.value) ? "" : "Wrong second name"
+      );
     },
-  }),
+  },
 });
 
 const userFormSecondNameField = new Field("label", {
   label: "Second name",
-
   attr: {
     class: "field account-page__user-form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your second name",
-    name: "second_name",
-    type: "text",
-    events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          nameValidate(e.target.value) ? "" : "Wrong second name"
-        );
-      },
-    },
-  }),
+  input: userFormSecondNameInput,
 });
 
-const userFormLoginField = new Field("label", {
+const userFormDisplayNameInput = new Input("div", {
+  placeholder: "Enter your display name",
+  name: "display_name",
+  type: "text",
+  events: {
+    blur: (e: EventType) => {
+      e.target.setCustomValidity(
+        nameValidate(e.target.value) ? "" : "Wrong display name"
+      );
+    },
+  },
+});
+
+const userFormDisplayNameField = new Field("label", {
   label: "Login",
 
   attr: {
     class: "field account-page__user-form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your login",
-    name: "login",
-    type: "text",
-    events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          loginValidate(e.target.value) ? "" : "Wrong login"
-        );
-      },
+  input: userFormDisplayNameInput,
+});
+
+const userFormLoginInput = new Input("div", {
+  placeholder: "Enter your login",
+  name: "login",
+  type: "text",
+  events: {
+    blur: (e: EventType) => {
+      e.target.setCustomValidity(
+        loginValidate(e.target.value) ? "" : "Wrong login"
+      );
     },
-  }),
+  },
+});
+
+const userFormLoginField = new Field("label", {
+  label: "Email",
+
+  attr: {
+    class: "field account-page__user-form-field",
+  },
+  input: userFormLoginInput,
+});
+
+const userFormEmailInput = new Input("div", {
+  placeholder: "Enter your email",
+  name: "email",
+  type: "email",
+  events: {
+    blur: (e: EventType) => {
+      e.target.setCustomValidity(
+        emailValidate(e.target.value) ? "" : "Wrong email"
+      );
+    },
+  },
 });
 
 const userFormEmailField = new Field("label", {
@@ -152,18 +184,20 @@ const userFormEmailField = new Field("label", {
   attr: {
     class: "field account-page__user-form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your email",
-    name: "email",
-    type: "email",
-    events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          emailValidate(e.target.value) ? "" : "Wrong email"
-        );
-      },
+  input: userFormEmailInput,
+});
+
+const userFormPhoneInput = new Input("div", {
+  placeholder: "Enter your phone",
+  name: "phone",
+  type: "text",
+  events: {
+    blur: (e: EventType) => {
+      e.target.setCustomValidity(
+        phoneValidate(e.target.value) ? "" : "Wrong phone"
+      );
     },
-  }),
+  },
 });
 
 const userFormPhoneField = new Field("label", {
@@ -172,47 +206,16 @@ const userFormPhoneField = new Field("label", {
   attr: {
     class: "field account-page__user-form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your phone",
-    name: "phone",
-    type: "text",
-    events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          phoneValidate(e.target.value) ? "" : "Wrong phone"
-        );
-      },
-    },
-  }),
-});
-
-const userFormPasswordField = new Field("label", {
-  label: "Password",
-
-  attr: {
-    class: "field account-page__user-form-field",
-  },
-  input: new Input("div", {
-    placeholder: "Enter your password",
-    name: "password",
-    type: "password",
-    events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          passwordValidate(e.target.value) ? "" : "Wrong password"
-        );
-      },
-    },
-  }),
+  input: userFormPhoneInput,
 });
 
 const userForm = new UserForm("form", {
   firstNameField: userFormFirstNameField,
   secondNameField: userFormSecondNameField,
-  loginField: userFormLoginField,
+  displayNameField: userFormDisplayNameField,
   emailField: userFormEmailField,
+  loginField: userFormLoginField,
   phoneField: userFormPhoneField,
-  passwordField: userFormPasswordField,
   button: userFormSubmitButton,
   attr: {
     class: "account-page__user-form hidden",
@@ -221,7 +224,10 @@ const userForm = new UserForm("form", {
     submit: (e: EventType) => {
       e.preventDefault();
 
-      showFormDataInConsole(e.target);
+      const data = getDataFromForm(e.target);
+      const userController = new UserController();
+
+      userController.updateProfile({ data });
     },
   },
 });
@@ -239,24 +245,39 @@ const passwordFormSubmitButton = new Button("button", {
   },
 });
 
+const passwordFormOldPasswordInput = new Input("div", {
+  placeholder: "Enter your old password",
+  name: "oldPassword",
+  type: "password",
+  events: {
+    blur: (e: EventType) => {
+      e.target.setCustomValidity(
+        passwordValidate(e.target.value) ? "" : "Wrong old password"
+      );
+    },
+  },
+});
+
 const passwordFormOldPasswordField = new Field("label", {
   label: "Old password",
 
   attr: {
     class: "field account-page__password-form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your old password",
-    name: "oldPassword",
-    type: "password",
-    events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          passwordValidate(e.target.value) ? "" : "Wrong old password"
-        );
-      },
+  input: passwordFormOldPasswordInput,
+});
+
+const passwordFormNewPasswordInput = new Input("div", {
+  placeholder: "Enter your new password",
+  name: "newPassword",
+  type: "password",
+  events: {
+    blur: (e: EventType) => {
+      e.target.setCustomValidity(
+        passwordValidate(e.target.value) ? "" : "Wrong new password"
+      );
     },
-  }),
+  },
 });
 
 const passwordFormNewPasswordField = new Field("label", {
@@ -265,18 +286,20 @@ const passwordFormNewPasswordField = new Field("label", {
   attr: {
     class: "field account-page__password-form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your new password",
-    name: "newPassword",
-    type: "password",
-    events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          passwordValidate(e.target.value) ? "" : "Wrong new password"
-        );
-      },
+  input: passwordFormNewPasswordInput,
+});
+
+const passwordFormRepeatPasswordInput = new Input("div", {
+  placeholder: "Repeat your new password",
+  name: "repeat_newPassword",
+  type: "password",
+  events: {
+    blur: (e: EventType) => {
+      e.target.setCustomValidity(
+        passwordValidate(e.target.value) ? "" : "Wrong repeated password"
+      );
     },
-  }),
+  },
 });
 
 const passwordFormRepeatPasswordField = new Field("label", {
@@ -285,18 +308,7 @@ const passwordFormRepeatPasswordField = new Field("label", {
   attr: {
     class: "field account-page__password-form-field",
   },
-  input: new Input("div", {
-    placeholder: "Repeat your new password",
-    name: "repeat_newPassword",
-    type: "password",
-    events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          passwordValidate(e.target.value) ? "" : "Wrong repeated password"
-        );
-      },
-    },
-  }),
+  input: passwordFormRepeatPasswordInput,
 });
 
 const passwordForm = new PasswordForm("form", {
@@ -311,12 +323,80 @@ const passwordForm = new PasswordForm("form", {
     submit: (e: EventType) => {
       e.preventDefault();
 
-      showFormDataInConsole(e.target);
+      const data = getDataFromForm(e.target);
+      const userController = new UserController();
+
+      userController.updatePassword({ data });
     },
   },
 });
 
+const logoutButton = new Button("button", {
+  text: "Log out",
+  attr: {
+    class: "account-page__logout",
+    type: "button",
+  },
+  events: {
+    click: () => {
+      const router = new Router("#root");
+      const authController = new AuthController();
+
+      authController.logout();
+
+      router.go("/");
+    },
+  },
+});
+
+const avatarInput = new Input("div", {
+  name: "avatar",
+  type: "file",
+  attr: {
+    class: "account-page__avatar-file-input",
+  },
+  events: {
+    change: (e: EventType) => {
+      const data = new FormData();
+      data.append("avatar", e.target.files[0]);
+
+      const userController = new UserController();
+
+      userController.updateAvatar({ data });
+    },
+  },
+});
+
+const avatarField = new Field("label", {
+  label: "Change avatar",
+  attr: {
+    class: "account-page__avatar-file",
+  },
+  input: avatarInput,
+});
+
 export class AccountPageComponent extends Block<AccountPageProps> {
+  constructor(tag: string, props: any) {
+    super(tag, props);
+
+    this._store.on(StoreEvents.UPDATED, () => {
+      this.setProps({
+        user: this._store.getState().user,
+      });
+
+      userFormFirstNameInput.setProps({ value: this._props.user?.first_name });
+      userFormSecondNameInput.setProps({
+        value: this._props.user?.second_name,
+      });
+      userFormDisplayNameInput.setProps({
+        value: this._props.user?.display_name,
+      });
+      userFormLoginInput.setProps({ value: this._props.user?.login });
+      userFormEmailInput.setProps({ value: this._props.user?.email });
+      userFormPhoneInput.setProps({ value: this._props.user?.phone });
+    });
+  }
+
   render() {
     return this.compile(template, this._props);
   }
@@ -325,7 +405,8 @@ export class AccountPageComponent extends Block<AccountPageProps> {
 export const AccountPage = new AccountPageComponent("div", {
   userForm,
   passwordForm,
-  users,
+  avatarField,
   editInfoButton,
   changePasswordButton,
+  logoutButton,
 });

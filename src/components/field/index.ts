@@ -1,9 +1,10 @@
-import { Input } from './../input/index';
+import { Input } from "./../input/index";
 import template from "./template.hbs";
 import Block from "../../utils/block";
 
 interface FieldProps {
-  label: string;
+  label?: string;
+  value?: string | number;
   input: Input;
   attr: {
     class?: string;

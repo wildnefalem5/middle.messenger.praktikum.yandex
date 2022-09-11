@@ -1,5 +1,9 @@
 import { Route } from "./route";
 
+window.addEventListener("popstate", (event: any) => {
+  console.log("1232321");
+});
+
 export class Router {
   static __instance: any;
   private _currentRoute: Route | null;
@@ -13,7 +17,6 @@ export class Router {
     }
 
     this.routes = [];
-    this.history = window.history;
     this._currentRoute = null;
     this._rootQuery = rootQuery;
 
@@ -31,9 +34,9 @@ export class Router {
   }
 
   public start() {
-    window.onpopstate = (event: any) => {
+    window.addEventListener("popstate", (event: any) => {
       this._onRoute(event.currentTarget.location.pathname);
-    };
+    });
 
     this._onRoute(window.location.pathname);
   }
@@ -49,11 +52,14 @@ export class Router {
       this._currentRoute.leave();
     }
 
+    this._currentRoute = route;
+
     route.render();
   }
 
   public go(pathname: string) {
-    this.history.pushState({}, "", pathname);
+    history.pushState({}, "", pathname);
+
     this._onRoute(pathname);
   }
 
@@ -62,10 +68,10 @@ export class Router {
   }
 
   public back() {
-    this.history.back();
+    history.back();
   }
 
   public forward() {
-    this.history.forward();
+    history.forward();
   }
 }

@@ -1,5 +1,6 @@
 import { v4 as makeUUID } from "uuid";
 import EventBus from "./event-bus";
+import { store, Store } from "./store";
 
 export type TMeta = {
   tag: string;
@@ -22,6 +23,8 @@ abstract class Block<TProps> {
 
   protected _props: TProps;
 
+  protected _store: Store;
+
   protected _children: TProps;
 
   protected _meta: TMeta;
@@ -40,6 +43,7 @@ abstract class Block<TProps> {
 
     this._children = this._makePropsProxy(children);
     this._props = this._makePropsProxy({ ...props, __id: this._id });
+    this._store = store;
 
     this._meta = { tag, props };
     this._registerEvents();
@@ -125,7 +129,7 @@ abstract class Block<TProps> {
     return true;
   }
 
-  setProps = (nextProps: TProps): void => {
+  setProps = (nextProps: Partial<TProps>): void => {
     if (!nextProps) {
       return;
     }

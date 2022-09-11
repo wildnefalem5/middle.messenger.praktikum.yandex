@@ -9,7 +9,7 @@ interface ButtonProps {
   };
   events?: {
     click?: Function;
-  }
+  };
 }
 
 export class Button extends Block<ButtonProps> {

@@ -1,12 +1,11 @@
 import { Field } from "./../../../../components/field/index";
 import { Button } from "../../../../components/button";
-import template from "./template.hbs";
 import Block from "../../../../utils/block";
+import template from "./template.hbs";
 
-interface LoginFormProps {
-  emailField: Field;
-  passwordField: Field;
-  button: Button;
+interface MessageFormProps {
+  messageField: Field;
+  submitButton: Button;
   attr: {
     class?: string;
   };
@@ -15,7 +14,7 @@ interface LoginFormProps {
   };
 }
 
-export class LoginForm extends Block<LoginFormProps> {
+export class MessageForm extends Block<MessageFormProps> {
   render() {
     return this.compile(template, this._props);
   }

@@ -1,5 +1,6 @@
+import { AuthController } from "./../../controller/auth-controller";
 import { emailValidate, passwordValidate } from "./../../utils/validate";
-import { showFormDataInConsole } from "./../../utils/show-form-data-console";
+import { getDataFromForm } from "./../../utils/show-form-data-console";
 import "../../styles.scss";
 import { Field } from "./../../components/field/index";
 import template from "./template.hbs";
@@ -23,14 +24,14 @@ const button = new Button("button", {
 });
 
 const emailField = new Field("label", {
-  label: "Email",
+  label: "Login",
   attr: {
     class: "field login-page__form-field",
   },
   input: new Input("div", {
-    placeholder: "Enter your email",
-    name: "email",
-    type: "email",
+    placeholder: "Enter your login",
+    name: "login",
+    type: "text",
     events: {
       blur: (e: EventType) => {
         e.target.setCustomValidity(
@@ -71,7 +72,10 @@ const loginForm = new LoginForm("form", {
     submit: (e: EventType) => {
       e.preventDefault();
 
-      showFormDataInConsole(e.target);
+      const authController = new AuthController();
+      const data = getDataFromForm(e.target);
+
+      authController.signIn({ data });
     },
   },
 });

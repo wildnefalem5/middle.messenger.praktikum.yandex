@@ -1,4 +1,4 @@
-import { Field } from './../../../../components/field/index';
+import { Field } from "./../../../../components/field/index";
 import { Button } from "../../../../components/button";
 import template from "./template.hbs";
 import Block from "../../../../utils/block";
@@ -16,7 +16,7 @@ interface RegistrationFormProps {
   };
   events?: {
     submit?: Function;
-  }
+  };
 }
 
 export class RegistrationForm extends Block<RegistrationFormProps> {

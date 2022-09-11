@@ -5,10 +5,6 @@
   color: $input-text-color;
   width: 100%;
 
-  &--textarea {
-    height: 100%;
-  }
-
   &,
   &::placeholder {
     font-size: $input-font-size;

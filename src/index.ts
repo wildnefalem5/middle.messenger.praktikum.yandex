@@ -7,15 +7,13 @@ import { ChatPage } from "./pages/chat/index";
 import { AccountPage } from "./pages/account/index";
 import { LoginPage } from "./pages/login/index";
 
-window.addEventListener("DOMContentLoaded", () => {
-  const router = new Router("#root");
+const router = new Router("#root");
 
-  router
-    .use("/", LoginPage)
-    .use("/registration", RegistrationPage)
-    .use("/chat", ChatPage)
-    .use("/account", AccountPage)
-    .use("/500", ServiceWorkPage)
-    .use("/404", NotFoundPage)
-    .start();
-});
+router
+  .use("/", LoginPage)
+  .use("/registration", RegistrationPage)
+  .use("/chat", ChatPage)
+  .use("/account", AccountPage)
+  .use("/500", ServiceWorkPage)
+  .use("/404", NotFoundPage)
+  .start();

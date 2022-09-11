@@ -14,7 +14,12 @@
     flex: 1;
 
     &-header {
+      display: flex;
       height: 4rem;
+
+      &-account-button {
+        margin-left: auto;
+      }
     }
 
     &-messages {
@@ -27,11 +32,19 @@
     }
 
     &-form {
+      position: relative;
+      
       &-input {
         padding: 2.4rem;
         height: 30rem;
         width: 100%;
         border: none;
+      }
+
+      &-button {
+        position: absolute;
+        bottom: 2.4rem;
+        left: 2.4rem;
       }
     }
   }

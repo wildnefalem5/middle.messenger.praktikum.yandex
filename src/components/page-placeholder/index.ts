@@ -1,4 +1,4 @@
-import { Button } from './../button/index';
+import { Button } from "./../button/index";
 import template from "./template.hbs";
 import Block from "../../utils/block";
 

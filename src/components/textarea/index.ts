@@ -1,22 +1,20 @@
-import Block from "../../utils/block";
 import template from "./template.hbs";
+import Block from "../../utils/block";
 
-interface InputProps {
+interface TextareaProps {
   type?: string;
   name?: string;
   placeholder?: string;
-  value?: string | number;
   attr?: {
     class?: string;
   };
   events?: {
     blur?: Function;
     focus?: Function;
-    change?: Function;
   };
 }
 
-export class Input extends Block<InputProps> {
+export class Textarea extends Block<TextareaProps> {
   render() {
     return this.compile(template, this._props);
   }

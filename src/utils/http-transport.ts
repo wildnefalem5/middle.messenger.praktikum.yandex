@@ -8,7 +8,7 @@ export enum METHODS {
 export interface IRequestOptions {
   method?: string;
   retries?: number;
-  data?: Record<string, string | number | Array<string | number>>;
+  data?: any;
   timeout?: number;
   headers?: Record<string, string>;
 }
@@ -23,11 +23,17 @@ export class HTTPTransport {
   };
 
   post = (url: string, options: IRequestOptions = {}) => {
-    return this.request(url, { ...options, method: METHODS.POST });
+    return this.request(url, {
+      ...options,
+      method: METHODS.POST,
+    });
   };
 
   put = (url: string, options: IRequestOptions = {}) => {
-    return this.request(url, { ...options, method: METHODS.PUT });
+    return this.request(url, {
+      ...options,
+      method: METHODS.PUT,
+    });
   };
 
   delete = (url: string, options: IRequestOptions = {}) => {
@@ -55,6 +61,8 @@ export class HTTPTransport {
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
+
+      xhr.withCredentials = true;
 
       xhr.onload = () => {
         resolve(xhr);

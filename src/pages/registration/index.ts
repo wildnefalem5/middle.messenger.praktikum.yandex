@@ -1,3 +1,4 @@
+import { AuthController } from "./../../controller/auth-controller";
 import {
   nameValidate,
   loginValidate,
@@ -6,7 +7,7 @@ import {
   passwordValidate,
 } from "./../../utils/validate";
 import { RegistrationForm } from "./components/registration-form/index";
-import { showFormDataInConsole } from "./../../utils/show-form-data-console";
+import { getDataFromForm } from "./../../utils/show-form-data-console";
 import "../../styles.scss";
 import { Field } from "./../../components/field/index";
 import { Button } from "./../../components/button/index";
@@ -162,7 +163,10 @@ const registrationForm = new RegistrationForm("form", {
     submit: (e: EventType) => {
       e.preventDefault();
 
-      showFormDataInConsole(e.target);
+      const authController = new AuthController();
+      const data = getDataFromForm(e.target);
+
+      authController.signUp({ data });
     },
   },
 });
