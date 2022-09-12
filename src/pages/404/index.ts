@@ -1,8 +1,9 @@
 import "../../styles.scss";
-import template from "./template.hbs";
-import Block from "../../utils/block";
+import Block from "../../utils/block/block";
 import { PagePlaceholder } from "../../components/page-placeholder/index";
 import { Button } from "../../components/button/index";
+// @ts-ignore
+import template from "./template.hbs";
 
 interface NotFoundPageProps {}
 

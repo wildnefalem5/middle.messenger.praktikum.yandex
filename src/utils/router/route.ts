@@ -1,4 +1,4 @@
-import { renderTemplate } from "./render-template";
+import { renderTemplate } from "../render-template";
 
 export class Route {
   private _pathname: string;
@@ -22,7 +22,7 @@ export class Route {
 
   public leave() {
     if (this._block) {
-      this._block.hide();
+      this._block.getContent().remove();
     }
   }
 

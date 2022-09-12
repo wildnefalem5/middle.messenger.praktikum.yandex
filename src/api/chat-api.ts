@@ -1,44 +1,37 @@
-import { Api } from "./api";
 import { IRequestOptions } from "../utils/http-transport";
+import { RequestChatData, RequestChatUserData } from "./types";
+import { Api } from "./api";
 
 export class ChatApi extends Api {
-  constructor() {
-    super();
-  }
-
-  public create(options: IRequestOptions) {
-    return this._http.post(this._baseUrl, {
+  public create(options: IRequestOptions<RequestChatData>) {
+    return this._http.post("/chats", {
       ...options,
       headers: this._jsonHeaders,
     });
   }
 
-  public loadMore() {
-    return this._http.get(this._getUrl("/chats/?limit=20"), {});
+  public loadMore(limit: number = 20) {
+    const limitParam = `limit=${limit}`;
+
+    return this._http.get(`/chats/?${limitParam}`, {});
   }
 
-  public invite(options: IRequestOptions) {
-    return this._http.put(this._getUrl("/chats/users"), {
+  public invite(options: IRequestOptions<RequestChatUserData>) {
+    return this._http.put("/chats/users", {
       ...options,
       headers: this._jsonHeaders,
     });
+  }
+
+  public delete(options: IRequestOptions<RequestChatUserData>) {
+    return this._http.delete("/chats/users", options);
   }
 
   public getMembersByChatId(id: number) {
-    return this._http.get(this._getUrl(`/chats/${id}/users`), {});
+    return this._http.get(`/chats/${id}/users`, {});
   }
 
-  public getToken(id: number, options: IRequestOptions) {
-    return this._http.post(this._getUrl(`/chats/token/${id}`), {
-      ...options,
-      headers: this._jsonHeaders,
-    });
-  }
-
-  public updateAvatar(options: IRequestOptions) {
-    return this._http.put(this._getUrl("/chats/avatar"), {
-      ...options,
-      headers: this._jsonHeaders,
-    });
+  public getToken(id: number) {
+    return this._http.post(`/chats/token/${id}`);
   }
 }

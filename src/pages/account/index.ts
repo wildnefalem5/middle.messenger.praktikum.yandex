@@ -1,7 +1,7 @@
-import { AvatarForm } from "./components/avatar-form/index";
-import { StoreEvents, User } from "./../../utils/store";
-import { AuthController } from "./../../controller/auth-controller";
-import { Router } from "./../../utils/router";
+import { userController } from "./../../api/controller/user-controller";
+import { authController } from "./../../api/controller/auth-controller";
+import { StoreEvents, User } from "../../utils/store/store";
+import { Router } from "../../utils/router/router";
 import "../../styles.scss";
 import {
   nameValidate,
@@ -15,18 +15,13 @@ import { PasswordForm } from "./components/password-form/index";
 import { getDataFromForm } from "./../../utils/show-form-data-console";
 import { Field } from "./../../components/field/index";
 import { Button } from "./../../components/button/index";
-import template from "./template.hbs";
-import Block from "../../utils/block";
+import Block from "../../utils/block/block";
 import { Input } from "../../components/input";
-import { UserController } from "../../controller/user-controller";
+// @ts-ignore
+import template from "./template.hbs";
 
 interface AccountPageProps {
   user?: User;
-}
-
-interface EventType {
-  preventDefault: Function;
-  target: HTMLFormElement;
 }
 
 export const toggleFormVisible = (form: PasswordForm | UserForm) => {
@@ -84,10 +79,11 @@ const userFormFirstNameInput = new Input("div", {
   name: "first_name",
   type: "text",
   events: {
-    blur: (e: EventType) => {
-      e.target.setCustomValidity(
-        nameValidate(e.target.value) ? "" : "Wrong first name"
-      );
+    blur: (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      const error = nameValidate(input.value) ? "" : "Wrong first name";
+
+      input?.setCustomValidity(error);
     },
   },
 });
@@ -105,10 +101,11 @@ const userFormSecondNameInput = new Input("div", {
   name: "second_name",
   type: "text",
   events: {
-    blur: (e: EventType) => {
-      e.target.setCustomValidity(
-        nameValidate(e.target.value) ? "" : "Wrong second name"
-      );
+    blur: (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      const error = nameValidate(input.value) ? "" : "Wrong second name";
+
+      input?.setCustomValidity(error);
     },
   },
 });
@@ -126,10 +123,11 @@ const userFormDisplayNameInput = new Input("div", {
   name: "display_name",
   type: "text",
   events: {
-    blur: (e: EventType) => {
-      e.target.setCustomValidity(
-        nameValidate(e.target.value) ? "" : "Wrong display name"
-      );
+    blur: (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      const error = nameValidate(input.value) ? "" : "Wrong display name";
+
+      input?.setCustomValidity(error);
     },
   },
 });
@@ -148,10 +146,11 @@ const userFormLoginInput = new Input("div", {
   name: "login",
   type: "text",
   events: {
-    blur: (e: EventType) => {
-      e.target.setCustomValidity(
-        loginValidate(e.target.value) ? "" : "Wrong login"
-      );
+    blur: (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      const error = loginValidate(input.value) ? "" : "Wrong login";
+
+      input?.setCustomValidity(error);
     },
   },
 });
@@ -170,10 +169,11 @@ const userFormEmailInput = new Input("div", {
   name: "email",
   type: "email",
   events: {
-    blur: (e: EventType) => {
-      e.target.setCustomValidity(
-        emailValidate(e.target.value) ? "" : "Wrong email"
-      );
+    blur: (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      const error = emailValidate(input.value) ? "" : "Wrong email";
+
+      input?.setCustomValidity(error);
     },
   },
 });
@@ -192,10 +192,11 @@ const userFormPhoneInput = new Input("div", {
   name: "phone",
   type: "text",
   events: {
-    blur: (e: EventType) => {
-      e.target.setCustomValidity(
-        phoneValidate(e.target.value) ? "" : "Wrong phone"
-      );
+    blur: (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      const error = phoneValidate(input.value) ? "" : "Wrong phone";
+
+      input?.setCustomValidity(error);
     },
   },
 });
@@ -221,11 +222,12 @@ const userForm = new UserForm("form", {
     class: "account-page__user-form hidden",
   },
   events: {
-    submit: (e: EventType) => {
+    submit: (e: Event) => {
       e.preventDefault();
 
-      const data = getDataFromForm(e.target);
-      const userController = new UserController();
+      const form = e.target as HTMLFormElement;
+
+      const data = getDataFromForm(form);
 
       userController.updateProfile({ data });
     },
@@ -250,10 +252,11 @@ const passwordFormOldPasswordInput = new Input("div", {
   name: "oldPassword",
   type: "password",
   events: {
-    blur: (e: EventType) => {
-      e.target.setCustomValidity(
-        passwordValidate(e.target.value) ? "" : "Wrong old password"
-      );
+    blur: (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      const error = passwordValidate(input.value) ? "" : "Wrong old password";
+
+      input?.setCustomValidity(error);
     },
   },
 });
@@ -272,10 +275,11 @@ const passwordFormNewPasswordInput = new Input("div", {
   name: "newPassword",
   type: "password",
   events: {
-    blur: (e: EventType) => {
-      e.target.setCustomValidity(
-        passwordValidate(e.target.value) ? "" : "Wrong new password"
-      );
+    blur: (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      const error = passwordValidate(input.value) ? "" : "Wrong new password";
+
+      input?.setCustomValidity(error);
     },
   },
 });
@@ -294,17 +298,19 @@ const passwordFormRepeatPasswordInput = new Input("div", {
   name: "repeat_newPassword",
   type: "password",
   events: {
-    blur: (e: EventType) => {
-      e.target.setCustomValidity(
-        passwordValidate(e.target.value) ? "" : "Wrong repeated password"
-      );
+    blur: (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      const error = passwordValidate(input.value)
+        ? ""
+        : "Wrong repeated password";
+
+      input?.setCustomValidity(error);
     },
   },
 });
 
 const passwordFormRepeatPasswordField = new Field("label", {
   label: "Repeat new password",
-
   attr: {
     class: "field account-page__password-form-field",
   },
@@ -320,11 +326,12 @@ const passwordForm = new PasswordForm("form", {
     class: "account-page__password-form hidden",
   },
   events: {
-    submit: (e: EventType) => {
+    submit: (e: Event) => {
       e.preventDefault();
 
-      const data = getDataFromForm(e.target);
-      const userController = new UserController();
+      const form = e.target as HTMLFormElement;
+
+      const data = getDataFromForm(form);
 
       userController.updatePassword({ data });
     },
@@ -340,7 +347,6 @@ const logoutButton = new Button("button", {
   events: {
     click: () => {
       const router = new Router("#root");
-      const authController = new AuthController();
 
       authController.logout();
 
@@ -356,13 +362,16 @@ const avatarInput = new Input("div", {
     class: "account-page__avatar-file-input",
   },
   events: {
-    change: (e: EventType) => {
-      const data = new FormData();
-      data.append("avatar", e.target.files[0]);
+    change: (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      const file = input.files[0];
 
-      const userController = new UserController();
+      if (file) {
+        const data = new FormData();
+        data.append("avatar", file);
 
-      userController.updateAvatar({ data });
+        userController.updateAvatar({ data });
+      }
     },
   },
 });

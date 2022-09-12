@@ -1,4 +1,4 @@
-import { store, StoreEvents } from "./../utils/store";
+import { store, StoreEvents } from "./store";
 import { expect } from "chai";
 
 describe("Store", () => {

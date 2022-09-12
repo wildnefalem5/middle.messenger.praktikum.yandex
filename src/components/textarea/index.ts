@@ -1,5 +1,6 @@
+import Block from "../../utils/block/block";
+// @ts-ignore
 import template from "./template.hbs";
-import Block from "../../utils/block";
 
 interface TextareaProps {
   type?: string;
@@ -9,8 +10,8 @@ interface TextareaProps {
     class?: string;
   };
   events?: {
-    blur?: Function;
-    focus?: Function;
+    blur?: (e: Event) => void;
+    focus?: (e: Event) => void;
   };
 }
 

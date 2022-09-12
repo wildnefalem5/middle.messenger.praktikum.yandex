@@ -1,6 +1,6 @@
 import { v4 as makeUUID } from "uuid";
-import EventBus from "./event-bus";
-import { store, Store } from "./store";
+import EventBus from "../event-bus";
+import { store, Store } from "../store/store";
 
 export type TMeta = {
   tag: string;
@@ -233,14 +233,6 @@ abstract class Block<TProps> {
   }
 
   componentDidMount(): void {}
-
-  show(): void {
-    this.getContent().style.display = "block";
-  }
-
-  hide(): void {
-    this.getContent().style.display = "none";
-  }
 }
 
 export default Block;

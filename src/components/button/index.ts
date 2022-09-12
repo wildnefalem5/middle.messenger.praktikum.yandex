@@ -1,5 +1,6 @@
+import Block from "../../utils/block/block";
+// @ts-ignore
 import template from "./template.hbs";
-import Block from "../../utils/block";
 
 interface ButtonProps {
   text: string;
@@ -8,7 +9,7 @@ interface ButtonProps {
     type?: string;
   };
   events?: {
-    click?: Function;
+    click?: (e: Event) => void;
   };
 }
 

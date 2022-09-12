@@ -1,4 +1,4 @@
-import Block from "./block";
+import Block from "./block/block";
 
 export const renderTemplate = (query: string, block: Block<any>) => {
   const root = document.querySelector(query);

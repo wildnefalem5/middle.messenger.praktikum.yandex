@@ -1,4 +1,4 @@
-import { AuthController } from "./../../controller/auth-controller";
+import { authController } from "./../../api/controller/auth-controller";
 import {
   nameValidate,
   loginValidate,
@@ -11,17 +11,12 @@ import { getDataFromForm } from "./../../utils/show-form-data-console";
 import "../../styles.scss";
 import { Field } from "./../../components/field/index";
 import { Button } from "./../../components/button/index";
-
-import template from "./template.hbs";
-import Block from "../../utils/block";
+import Block from "../../utils/block/block";
 import { Input } from "../../components/input";
+// @ts-ignore
+import template from "./template.hbs";
 
 interface RegistrationPageProps {}
-
-interface EventType {
-  preventDefault: Function;
-  target: HTMLFormElement;
-}
 
 const button = new Button("button", {
   text: "sign up",
@@ -41,10 +36,11 @@ const firstNameField = new Field("label", {
     name: "first_name",
     type: "text",
     events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          nameValidate(e.target.value) ? "" : "Wrong first name"
-        );
+      blur: (e: Event) => {
+        const input = e.target as HTMLInputElement;
+        const error = nameValidate(input.value) ? "" : "Wrong first name";
+
+        input?.setCustomValidity(error);
       },
     },
   }),
@@ -61,10 +57,11 @@ const secondNameField = new Field("label", {
     name: "second_name",
     type: "text",
     events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          nameValidate(e.target.value) ? "" : "Wrong second name"
-        );
+      blur: (e: Event) => {
+        const input = e.target as HTMLInputElement;
+        const error = nameValidate(input.value) ? "" : "Wrong second name";
+
+        input?.setCustomValidity(error);
       },
     },
   }),
@@ -80,10 +77,11 @@ const loginField = new Field("label", {
     name: "login",
     type: "text",
     events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          loginValidate(e.target.value) ? "" : "Wrong login"
-        );
+      blur: (e: Event) => {
+        const input = e.target as HTMLInputElement;
+        const error = loginValidate(input.value) ? "" : "Wrong login";
+
+        input?.setCustomValidity(error);
       },
     },
   }),
@@ -99,10 +97,11 @@ const emailField = new Field("label", {
     name: "email",
     type: "email",
     events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          emailValidate(e.target.value) ? "" : "Wrong email"
-        );
+      blur: (e: Event) => {
+        const input = e.target as HTMLInputElement;
+        const error = emailValidate(input.value) ? "" : "Wrong email";
+
+        input?.setCustomValidity(error);
       },
     },
   }),
@@ -119,10 +118,11 @@ const phoneField = new Field("label", {
     name: "phone",
     type: "text",
     events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          phoneValidate(e.target.value) ? "" : "Wrong phone"
-        );
+      blur: (e: Event) => {
+        const input = e.target as HTMLInputElement;
+        const error = phoneValidate(input.value) ? "" : "Wrong phone";
+
+        input?.setCustomValidity(error);
       },
     },
   }),
@@ -139,10 +139,11 @@ const passwordField = new Field("label", {
     name: "password",
     type: "password",
     events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          passwordValidate(e.target.value) ? "" : "Wrong password"
-        );
+      blur: (e: Event) => {
+        const input = e.target as HTMLInputElement;
+        const error = passwordValidate(input.value) ? "" : "Wrong password";
+
+        input?.setCustomValidity(error);
       },
     },
   }),
@@ -160,11 +161,12 @@ const registrationForm = new RegistrationForm("form", {
     class: "registration-page__form",
   },
   events: {
-    submit: (e: EventType) => {
+    submit: (e: Event) => {
       e.preventDefault();
 
-      const authController = new AuthController();
-      const data = getDataFromForm(e.target);
+      const form = e.target as HTMLFormElement;
+
+      const data = getDataFromForm(form);
 
       authController.signUp({ data });
     },

@@ -1,5 +1,6 @@
+import Block from "../../utils/block/block";
+// @ts-ignore
 import template from "./template.hbs";
-import Block from "../../utils/block";
 
 interface LayoutProps {
   classList?: string;

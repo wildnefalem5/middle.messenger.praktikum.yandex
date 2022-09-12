@@ -1,20 +1,16 @@
-import { AuthController } from "./../../controller/auth-controller";
+import { authController } from "./../../api/controller/auth-controller";
 import { emailValidate, passwordValidate } from "./../../utils/validate";
 import { getDataFromForm } from "./../../utils/show-form-data-console";
 import "../../styles.scss";
 import { Field } from "./../../components/field/index";
-import template from "./template.hbs";
 import { Button } from "../../components/button/index";
-import Block from "../../utils/block";
+import Block from "../../utils/block/block";
 import { LoginForm } from "./components/login-form";
 import { Input } from "../../components/input";
+// @ts-ignore
+import template from "./template.hbs";
 
 interface LoginPageProps {}
-
-interface EventType {
-  preventDefault: Function;
-  target: HTMLFormElement;
-}
 
 const button = new Button("button", {
   text: "sign in",
@@ -33,10 +29,11 @@ const emailField = new Field("label", {
     name: "login",
     type: "text",
     events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          emailValidate(e.target.value) ? "" : "Wrong email"
-        );
+      blur: (e: Event) => {
+        const input = e.target as HTMLInputElement;
+        const error = emailValidate(input.value) ? "" : "Wrong email";
+
+        input?.setCustomValidity(error);
       },
     },
   }),
@@ -52,10 +49,11 @@ const passwordField = new Field("label", {
     name: "password",
     type: "password",
     events: {
-      blur: (e: EventType) => {
-        e.target.setCustomValidity(
-          passwordValidate(e.target.value) ? "" : "Wrong password"
-        );
+      blur: (e: Event) => {
+        const input = e.target as HTMLInputElement;
+        const error = passwordValidate(input.value) ? "" : "Wrong password";
+
+        input?.setCustomValidity(error);
       },
     },
   }),
@@ -69,11 +67,12 @@ const loginForm = new LoginForm("form", {
     class: "login-page__form",
   },
   events: {
-    submit: (e: EventType) => {
+    submit: (e: Event) => {
       e.preventDefault();
 
-      const authController = new AuthController();
-      const data = getDataFromForm(e.target);
+      const form = e.target as HTMLFormElement;
+
+      const data = getDataFromForm(form);
 
       authController.signIn({ data });
     },

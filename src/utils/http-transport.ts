@@ -5,48 +5,59 @@ export enum METHODS {
   DELETE = "DELETE",
 }
 
-export interface IRequestOptions {
+export interface IRequestOptions<Data> {
   method?: string;
   retries?: number;
-  data?: any;
+  data?: Data;
   timeout?: number;
   headers?: Record<string, string>;
 }
 
 export class HTTPTransport {
-  get = (url: string, options: IRequestOptions = {}) => {
+  protected _baseUrl?: string;
+
+  constructor(baseUrl?: string) {
+    this._baseUrl = baseUrl;
+  }
+
+  get = (url: string, options: IRequestOptions<any> = {}) => {
     const preparedUrl = options.data
       ? `${url}${queryStringify(options.data)}`
       : url;
 
-    return this.request(preparedUrl, { ...options, method: METHODS.GET });
+    return this.request(preparedUrl, { ...options, method: METHODS.GET }).catch(
+      (err) => console.log(url, err)
+    );
   };
 
-  post = (url: string, options: IRequestOptions = {}) => {
+  post = (url: string, options: IRequestOptions<any> = {}) => {
     return this.request(url, {
       ...options,
       method: METHODS.POST,
-    });
+    }).catch((err) => console.log(url, err));
   };
 
-  put = (url: string, options: IRequestOptions = {}) => {
+  put = (url: string, options: IRequestOptions<any> = {}) => {
     return this.request(url, {
       ...options,
       method: METHODS.PUT,
-    });
+    }).catch((err) => console.log(url, err));
   };
 
-  delete = (url: string, options: IRequestOptions = {}) => {
-    return this.request(url, { ...options, method: METHODS.DELETE });
+  delete = (url: string, options: IRequestOptions<any> = {}) => {
+    return this.request(url, { ...options, method: METHODS.DELETE }).catch(
+      (err) => console.log(url, err)
+    );
   };
 
   // eslint-disable-next-line class-methods-use-this
   private request(
     url: string,
-    options: IRequestOptions = {},
+    options: IRequestOptions<any> = {},
     timeout = 5000
   ): Promise<XMLHttpRequest> {
     const { headers = {}, method, data } = options;
+    const preparedUrl = `${this._baseUrl}${url}`;
 
     return new Promise((resolve, reject) => {
       if (!method) {
@@ -56,7 +67,7 @@ export class HTTPTransport {
 
       const xhr = new XMLHttpRequest();
 
-      xhr.open(method, url);
+      xhr.open(method, preparedUrl);
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);

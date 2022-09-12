@@ -1,9 +1,5 @@
 import { Route } from "./route";
 
-window.addEventListener("popstate", (event: any) => {
-  console.log("1232321");
-});
-
 export class Router {
   static __instance: any;
   private _currentRoute: Route | null;

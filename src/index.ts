@@ -1,5 +1,5 @@
 import "./styles.scss";
-import { Router } from "./utils/router";
+import { Router } from "./utils/router/router";
 import { RegistrationPage } from "./pages/registration/index";
 import { NotFoundPage } from "./pages/404/index";
 import { ServiceWorkPage } from "./pages/500/index";
@@ -11,9 +11,9 @@ const router = new Router("#root");
 
 router
   .use("/", LoginPage)
-  .use("/registration", RegistrationPage)
-  .use("/chat", ChatPage)
-  .use("/account", AccountPage)
+  .use("/sign-up", RegistrationPage)
+  .use("/messenger", ChatPage)
+  .use("/settings", AccountPage)
   .use("/500", ServiceWorkPage)
   .use("/404", NotFoundPage)
   .start();

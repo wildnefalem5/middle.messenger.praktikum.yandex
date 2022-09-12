@@ -1,8 +1,9 @@
-import { StoreEvents, User } from "./../../../../utils/store";
+import { StoreEvents, User } from "../../../../utils/store/store";
 import { Field } from "./../../../../components/field/index";
 import { Button } from "../../../../components/button";
+import Block from "../../../../utils/block/block";
+// @ts-ignore
 import template from "./template.hbs";
-import Block from "../../../../utils/block";
 
 interface UserFormProps {
   firstNameField: Field;
@@ -17,7 +18,7 @@ interface UserFormProps {
     class?: string;
   };
   events?: {
-    submit?: Function;
+    submit?: (e: Event) => void;
   };
 }
 

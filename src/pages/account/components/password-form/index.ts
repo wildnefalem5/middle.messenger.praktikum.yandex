@@ -1,7 +1,8 @@
 import { Field } from "./../../../../components/field/index";
 import { Button } from "../../../../components/button";
+import Block from "../../../../utils/block/block";
+// @ts-ignore
 import template from "./template.hbs";
-import Block from "../../../../utils/block";
 
 interface PasswordFormProps {
   oldPasswordField: Field;
@@ -12,7 +13,7 @@ interface PasswordFormProps {
     class?: string;
   };
   events?: {
-    submit?: Function;
+    submit?: (e: Event) => void;
   };
 }
 
