@@ -1,5 +1,5 @@
 import { WebSocketApi, WebSocketMessages } from "../../utils/web-socket";
-import { IRequestOptions } from "../../utils/http-transport";
+import { IRequestOptions } from "../../utils/http-transport/http-transport";
 import { ChatApi } from "../chat-api";
 import { RequestChatData, RequestChatUserData } from "../types";
 

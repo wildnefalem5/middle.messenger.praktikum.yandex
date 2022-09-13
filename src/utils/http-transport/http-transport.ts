@@ -1,3 +1,4 @@
+import { queryStringify } from './../query-stringify';
 export enum METHODS {
   GET = "GET",
   POST = "POST",

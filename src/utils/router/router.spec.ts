@@ -1,28 +1,36 @@
-import { NotFoundPage } from "./../../pages/404/index";
-import { ServiceWorkPage } from "./../../pages/500/index";
-import { AccountPage } from "./../../pages/account/index";
-import { ChatPage } from "./../../pages/chat/index";
-import { RegistrationPage } from "./../../pages/registration/index";
-import { LoginPage } from "./../../pages/login/index";
+import Block from "../block/block";
 import { Router } from "./router";
-import { assert } from "chai";
+import { assert, expect } from "chai";
+
+class Page extends Block<{}> {
+  render() {
+    return this.compile(() => "string content", this._props);
+  }
+}
 
 const router = new Router("#root");
+
+const page1 = new Page("div", {});
+const registrationPage = new Page("div", {});
+const chatPage = new Page("div", {});
+const accountPage = new Page("div", {});
+const serviceWorkPage = new Page("div", {});
+const notFoundPage = new Page("div", {});
 
 describe("Test router", () => {
   const initRouter = () => {
     router
-      .use("/", LoginPage)
-      .use("/sign-up", RegistrationPage)
-      .use("/messenger", ChatPage)
-      .use("/settings", AccountPage)
-      .use("/500", ServiceWorkPage)
-      .use("/404", NotFoundPage)
+      .use("/", page1)
+      .use("/sign-up", registrationPage)
+      .use("/messenger", chatPage)
+      .use("/settings", accountPage)
+      .use("/500", serviceWorkPage)
+      .use("/404", notFoundPage)
       .start();
   };
 
   it("check method getRoute", () => {
-    router.use("/404", NotFoundPage);
+    router.use("/404", notFoundPage);
 
     const route = router.getRoute("/404");
 
@@ -35,7 +43,7 @@ describe("Test router", () => {
     router.go("/404");
     router.go("/500");
 
-    assert.equal(window.location.pathname, "/500");
+    expect(window.location.pathname).to.equal("/500");
   });
 
   it("check method back", () => {
@@ -45,7 +53,7 @@ describe("Test router", () => {
     router.go("/500");
     router.back();
 
-    assert.equal(window.location.pathname, "/404");
+    expect(window.location.pathname).to.equal("/404");
   });
 
   it("check method forward", () => {
@@ -56,7 +64,7 @@ describe("Test router", () => {
     router.back();
     router.forward();
 
-    assert.equal(window.location.pathname, "/500");
+    expect(window.location.pathname).to.equal("/500");
   });
 
   it("router is singleton", () => {

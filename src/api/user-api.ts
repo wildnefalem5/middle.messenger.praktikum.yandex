@@ -1,4 +1,4 @@
-import { IRequestOptions } from "../utils/http-transport";
+import { IRequestOptions } from "../utils/http-transport/http-transport";
 import { Api } from "./api";
 import {
   RequestUserAvatarData,

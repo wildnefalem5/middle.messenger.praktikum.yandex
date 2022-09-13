@@ -1,6 +1,6 @@
 type Payload = Record<string, string | number | Array<string | number>>;
 
-const queryStringify = (data: Payload) => {
+export const queryStringify = (data: Payload) => {
   if (typeof data !== "object") {
     throw new Error("Data must be object");
   }

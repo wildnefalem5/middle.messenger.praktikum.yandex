@@ -1,26 +1,22 @@
-import { Button } from "./../../components/button";
 import Block from "./block";
 import { expect } from "chai";
 
+class Text extends Block<{}> {
+  render() {
+    return this.compile(() => "string content", this._props);
+  }
+}
 
 describe("Test component which was extend from block", () => {
-  const button = new Button("button", {
-    text: "Text",
-    attr: {
-      class: "button",
-      type: "button",
-    },
+  const text = new Text("div", {});
+
+  it("check text", () => {
+    const element = text.getContent();
+
+    expect(element.textContent).to.equal("string content");
   });
 
-  it("check text inside button", () => {
-    const element = button.getContent();
-
-    expect(element.textContent).to.equal("Text");
-  });
-
-  it("check instance from which extended button", () => {
-    const element = button.getContent();
-
-    expect(element instanceof Block).to.equal(true);
+  it("check instance from which extended", () => {
+    expect(text instanceof Block).to.equal(true);
   });
 });

@@ -1,4 +1,4 @@
-import { IRequestOptions } from "../../utils/http-transport";
+import { IRequestOptions } from "../../utils/http-transport/http-transport";
 import { store, Store } from "../../utils/store/store";
 import { UserApi } from "../user-api";
 import {

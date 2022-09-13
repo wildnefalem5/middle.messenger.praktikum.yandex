@@ -11,7 +11,7 @@ type TPropsTemplate = {
   [key: string]: string;
 };
 
-abstract class Block<TProps> {
+abstract class Block<TProps extends {}> {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -201,7 +201,7 @@ abstract class Block<TProps> {
     });
   }
 
-  getChildren(propsAndChildren: TProps) {
+  getChildren(propsAndChildren: Partial<TProps>) {
     const children: { [key: string]: Block<TProps> } = {};
     const props: any = {};
 

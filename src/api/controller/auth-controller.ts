@@ -1,6 +1,6 @@
 import { store, Store } from "../../utils/store/store";
 import { Router } from "../../utils/router/router";
-import { IRequestOptions } from "../../utils/http-transport";
+import { IRequestOptions } from "../../utils/http-transport/http-transport";
 import { AuthApi } from "../auth-api";
 import { RequestLoginData, RequestUserData } from "../types";
 
