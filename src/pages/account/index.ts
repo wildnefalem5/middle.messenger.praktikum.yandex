@@ -327,20 +327,18 @@ export class AccountPageComponent extends Block<AccountPageProps> {
     super(tag, props);
 
     this._store.on(StoreEvents.UPDATED, () => {
-      this.setProps({
-        user: this._store.getState().user,
-      });
+      const state = this._store.getState();
 
-      userFormFirstNameInput.setProps({ value: this._props.user?.first_name });
-      userFormSecondNameInput.setProps({
-        value: this._props.user?.second_name,
-      });
-      userFormDisplayNameInput.setProps({
-        value: this._props.user?.display_name,
-      });
-      userFormLoginInput.setProps({ value: this._props.user?.login });
-      userFormEmailInput.setProps({ value: this._props.user?.email });
-      userFormPhoneInput.setProps({ value: this._props.user?.phone });
+      this.setProps({ user: state.user });
+
+      const { user } = state;
+
+      userFormFirstNameInput.setProps({ value: user?.first_name });
+      userFormSecondNameInput.setProps({ value: user?.second_name });
+      userFormDisplayNameInput.setProps({ value: user?.display_name });
+      userFormLoginInput.setProps({ value: user?.login });
+      userFormEmailInput.setProps({ value: user?.email });
+      userFormPhoneInput.setProps({ value: user?.phone });
     });
   }
 
