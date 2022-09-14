@@ -30,3 +30,24 @@ export const passwordValidate = (value: string): boolean => {
 export const checkMessage = (value: string): boolean => {
   return REG_EXP.message.test(value);
 };
+
+export const inputValidate = (input: HTMLInputElement): string | undefined => {
+  const type = input.type;
+  const value = input.value;
+
+  if (type.includes("name")) {
+    return nameValidate(value) ? "" : "Wrong name";
+  }
+  if (type.includes("password")) {
+    return passwordValidate(value) ? "" : "Wrong password";
+  }
+  if (type.includes("login")) {
+    return loginValidate(value) ? "" : "Wrong login";
+  }
+  if (type.includes("phone")) {
+    return phoneValidate(value) ? "" : "Wrong phone";
+  }
+  if (type.includes("email")) {
+    return emailValidate(value) ? "" : "Wrong email";
+  }
+};

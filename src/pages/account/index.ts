@@ -3,13 +3,7 @@ import { authController } from "./../../api/controller/auth-controller";
 import { StoreEvents, User } from "../../utils/store/store";
 import { Router } from "../../utils/router/router";
 import "../../styles.scss";
-import {
-  nameValidate,
-  loginValidate,
-  emailValidate,
-  phoneValidate,
-  passwordValidate,
-} from "./../../utils/validate";
+import { inputValidate } from "./../../utils/validate";
 import { UserForm } from "./components/user-form/index";
 import { PasswordForm } from "./components/password-form/index";
 import { getDataFromForm } from "./../../utils/show-form-data-console";
@@ -24,6 +18,30 @@ interface AccountPageProps {
   user?: User;
 }
 
+class UserFormField extends Field {
+  constructor(label: string, input: Input) {
+    super("label", {
+      label,
+      attr: {
+        class: "field account-page__user-form-field",
+      },
+      input,
+    });
+  }
+}
+
+class PasswordFormField extends Field {
+  constructor(label: string, input: Input) {
+    super("label", {
+      label,
+      attr: {
+        class: "field account-page__password-form-field",
+      },
+      input,
+    });
+  }
+}
+
 export const toggleFormVisible = (form: PasswordForm | UserForm) => {
   const formNode = form.getContent();
   const isFormNodeHidden = formNode.classList.contains("hidden");
@@ -32,6 +50,15 @@ export const toggleFormVisible = (form: PasswordForm | UserForm) => {
   if (info) {
     info.classList.toggle("hidden", isFormNodeHidden);
     formNode.classList.toggle("hidden", !isFormNodeHidden);
+  }
+};
+
+const handleInputBlur = (e: Event) => {
+  const input = e.target as HTMLInputElement;
+  const error = inputValidate(input);
+
+  if (error) {
+    input?.setCustomValidity(error);
   }
 };
 
@@ -79,136 +106,75 @@ const userFormFirstNameInput = new Input("div", {
   name: "first_name",
   type: "text",
   events: {
-    blur: (e: Event) => {
-      const input = e.target as HTMLInputElement;
-      const error = nameValidate(input.value) ? "" : "Wrong first name";
-
-      input?.setCustomValidity(error);
-    },
+    blur: handleInputBlur,
   },
 });
 
-const userFormFirstNameField = new Field("label", {
-  label: "First name",
-  attr: {
-    class: "field account-page__user-form-field",
-  },
-  input: userFormFirstNameInput,
-});
+const userFormFirstNameField = new UserFormField(
+  "First name",
+  userFormFirstNameInput
+);
 
 const userFormSecondNameInput = new Input("div", {
   placeholder: "Enter your second name",
   name: "second_name",
   type: "text",
   events: {
-    blur: (e: Event) => {
-      const input = e.target as HTMLInputElement;
-      const error = nameValidate(input.value) ? "" : "Wrong second name";
-
-      input?.setCustomValidity(error);
-    },
+    blur: handleInputBlur,
   },
 });
 
-const userFormSecondNameField = new Field("label", {
-  label: "Second name",
-  attr: {
-    class: "field account-page__user-form-field",
-  },
-  input: userFormSecondNameInput,
-});
+const userFormSecondNameField = new UserFormField(
+  "Second name",
+  userFormSecondNameInput
+);
 
 const userFormDisplayNameInput = new Input("div", {
   placeholder: "Enter your display name",
   name: "display_name",
   type: "text",
   events: {
-    blur: (e: Event) => {
-      const input = e.target as HTMLInputElement;
-      const error = nameValidate(input.value) ? "" : "Wrong display name";
-
-      input?.setCustomValidity(error);
-    },
+    blur: handleInputBlur,
   },
 });
 
-const userFormDisplayNameField = new Field("label", {
-  label: "Login",
-
-  attr: {
-    class: "field account-page__user-form-field",
-  },
-  input: userFormDisplayNameInput,
-});
+const userFormDisplayNameField = new UserFormField(
+  "Login",
+  userFormDisplayNameInput
+);
 
 const userFormLoginInput = new Input("div", {
   placeholder: "Enter your login",
   name: "login",
   type: "text",
   events: {
-    blur: (e: Event) => {
-      const input = e.target as HTMLInputElement;
-      const error = loginValidate(input.value) ? "" : "Wrong login";
-
-      input?.setCustomValidity(error);
-    },
+    blur: handleInputBlur,
   },
 });
 
-const userFormLoginField = new Field("label", {
-  label: "Email",
-
-  attr: {
-    class: "field account-page__user-form-field",
-  },
-  input: userFormLoginInput,
-});
+const userFormLoginField = new UserFormField("Login", userFormLoginInput);
 
 const userFormEmailInput = new Input("div", {
   placeholder: "Enter your email",
   name: "email",
   type: "email",
   events: {
-    blur: (e: Event) => {
-      const input = e.target as HTMLInputElement;
-      const error = emailValidate(input.value) ? "" : "Wrong email";
-
-      input?.setCustomValidity(error);
-    },
+    blur: handleInputBlur,
   },
 });
 
-const userFormEmailField = new Field("label", {
-  label: "Email",
-
-  attr: {
-    class: "field account-page__user-form-field",
-  },
-  input: userFormEmailInput,
-});
+const userFormEmailField = new UserFormField("Email", userFormEmailInput);
 
 const userFormPhoneInput = new Input("div", {
   placeholder: "Enter your phone",
   name: "phone",
   type: "text",
   events: {
-    blur: (e: Event) => {
-      const input = e.target as HTMLInputElement;
-      const error = phoneValidate(input.value) ? "" : "Wrong phone";
-
-      input?.setCustomValidity(error);
-    },
+    blur: handleInputBlur,
   },
 });
 
-const userFormPhoneField = new Field("label", {
-  label: "Phone",
-
-  attr: {
-    class: "field account-page__user-form-field",
-  },
-  input: userFormPhoneInput,
-});
+const userFormPhoneField = new UserFormField("Phone", userFormPhoneInput);
 
 const userForm = new UserForm("form", {
   firstNameField: userFormFirstNameField,
@@ -252,70 +218,42 @@ const passwordFormOldPasswordInput = new Input("div", {
   name: "oldPassword",
   type: "password",
   events: {
-    blur: (e: Event) => {
-      const input = e.target as HTMLInputElement;
-      const error = passwordValidate(input.value) ? "" : "Wrong old password";
-
-      input?.setCustomValidity(error);
-    },
+    blur: handleInputBlur,
   },
 });
 
-const passwordFormOldPasswordField = new Field("label", {
-  label: "Old password",
-
-  attr: {
-    class: "field account-page__password-form-field",
-  },
-  input: passwordFormOldPasswordInput,
-});
+const passwordFormOldPasswordField = new PasswordFormField(
+  "Old password",
+  passwordFormOldPasswordInput
+);
 
 const passwordFormNewPasswordInput = new Input("div", {
   placeholder: "Enter your new password",
   name: "newPassword",
   type: "password",
   events: {
-    blur: (e: Event) => {
-      const input = e.target as HTMLInputElement;
-      const error = passwordValidate(input.value) ? "" : "Wrong new password";
-
-      input?.setCustomValidity(error);
-    },
+    blur: handleInputBlur,
   },
 });
 
-const passwordFormNewPasswordField = new Field("label", {
-  label: "New password",
-
-  attr: {
-    class: "field account-page__password-form-field",
-  },
-  input: passwordFormNewPasswordInput,
-});
+const passwordFormNewPasswordField = new PasswordFormField(
+  "New password",
+  passwordFormNewPasswordInput
+);
 
 const passwordFormRepeatPasswordInput = new Input("div", {
   placeholder: "Repeat your new password",
   name: "repeat_newPassword",
   type: "password",
   events: {
-    blur: (e: Event) => {
-      const input = e.target as HTMLInputElement;
-      const error = passwordValidate(input.value)
-        ? ""
-        : "Wrong repeated password";
-
-      input?.setCustomValidity(error);
-    },
+    blur: handleInputBlur,
   },
 });
 
-const passwordFormRepeatPasswordField = new Field("label", {
-  label: "Repeat new password",
-  attr: {
-    class: "field account-page__password-form-field",
-  },
-  input: passwordFormRepeatPasswordInput,
-});
+const passwordFormRepeatPasswordField = new PasswordFormField(
+  "Repeat new password",
+  passwordFormRepeatPasswordInput
+);
 
 const passwordForm = new PasswordForm("form", {
   oldPasswordField: passwordFormOldPasswordField,
