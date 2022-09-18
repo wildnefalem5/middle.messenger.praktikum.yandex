@@ -1,4 +1,4 @@
-import { Router } from "../../utils/router/router";
+import { router } from "../../utils/router/router";
 import { getDataFromForm } from "./../../utils/show-form-data-console";
 import { MessageForm } from "./components/message-form/index";
 import { Field } from "./../../components/field/index";
@@ -45,13 +45,11 @@ const messageField = new Field("label", {
 const accountButton = new Button("button", {
   text: "Account",
   attr: {
-    class: "chat-page__chat-header-account-button",
+    class: "button chat-page__chat-header-account-button",
     type: "button",
   },
   events: {
     click: () => {
-      const router = new Router("#root");
-
       router.go("/settings");
     },
   },

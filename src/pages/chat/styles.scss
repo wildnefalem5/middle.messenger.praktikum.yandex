@@ -14,10 +14,16 @@
 
     &-header {
       display: flex;
-      height: 4rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem;
+
+      &-title {
+        text-transform: uppercase;
+        font-weight: 700;
+      }
 
       &-account-button {
-        margin-left: auto;
       }
     }
 

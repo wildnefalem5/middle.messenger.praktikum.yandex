@@ -18,49 +18,37 @@ class ChatController {
   }
 
   createChat(options: IRequestOptions<RequestChatData>) {
-    return this._api.create(options).then((response) => {
-      console.log(response, "chat-controller, create chat");
-
+    return this._api.create(options).then(() => {
       // this._store.setState("user", user);
     });
   }
 
   loadMoreChat() {
-    return this._api.loadMore().then((response) => {
-      console.log(response, "chat-controller, load more chat");
-
+    return this._api.loadMore().then(() => {
       // this._store.setState("user", user);
     });
   }
 
   addUser(options: IRequestOptions<RequestChatUserData>) {
-    return this._api.invite(options).then((response) => {
-      console.log(response, "chat-controller, invite user");
-
+    return this._api.invite(options).then(() => {
       // this._store.setState("user", user);
     });
   }
 
   deleteUser(options: IRequestOptions<RequestChatUserData>) {
-    return this._api.delete(options).then((response) => {
-      console.log(response, "chat-controller, delete user");
-
+    return this._api.delete(options).then(() => {
       // this._store.setState("user", user);
     });
   }
 
   getUsersById(id: number) {
-    return this._api.getMembersByChatId(id).then((response) => {
-      console.log(response, "chat-controller, get chat members");
-
+    return this._api.getMembersByChatId(id).then(() => {
       //this._api.getMembersByChatId(id)
     });
   }
 
   sendMessage(message: string) {
     const socket = new WebSocketApi();
-
-    console.log(message, "chat-controller, send message");
 
     if (socket) {
       socket.sendMessage(message, WebSocketMessages.MESSAGE);

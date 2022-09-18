@@ -44,9 +44,7 @@ class UserController {
   }
 
   updatePassword(options: IRequestOptions<RequestUserPasswordData>) {
-    return this._api.updatePassword(options).catch(() => {
-      console.log("some error in user-controller, updatePassword");
-    });
+    return this._api.updatePassword(options)
   }
 }
 

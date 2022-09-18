@@ -10,4 +10,4 @@ RUN npm run build
 
 EXPOSE 3000
 
-CMD node src/index.ts
+CMD ["node", "server.js"]
