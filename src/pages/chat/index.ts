@@ -67,7 +67,9 @@ const messageForm = new MessageForm("form", {
     submit: (e: Event) => {
       e.preventDefault();
 
-      getDataFromForm(e.target);
+      const form = e.target as HTMLFormElement;
+
+      getDataFromForm(form);
     },
   },
 });

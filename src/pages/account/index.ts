@@ -185,7 +185,7 @@ const userForm = new UserForm("form", {
       const form = e.target as HTMLFormElement;
 
       const data = getDataFromForm(form);
-
+      
       userController.updateProfile({ data });
     },
   },
@@ -284,10 +284,10 @@ const avatarInput = new Input("div", {
   events: {
     change: (e: Event) => {
       const input = e.target as HTMLInputElement;
-      const file = input.files[0];
+      const file = input?.files?.[0];
 
       if (file) {
-        const data = new FormData();
+        const data = new FormData() as any
         data.append("avatar", file);
 
         userController.updateAvatar({ data });
