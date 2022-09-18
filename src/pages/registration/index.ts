@@ -1,11 +1,5 @@
 import { authController } from "./../../api/controller/auth-controller";
-import {
-  nameValidate,
-  loginValidate,
-  emailValidate,
-  phoneValidate,
-  passwordValidate,
-} from "./../../utils/validate";
+import { inputValidate } from "./../../utils/validate";
 import { RegistrationForm } from "./components/registration-form/index";
 import { getDataFromForm } from "./../../utils/show-form-data-console";
 import "../../styles.scss";
@@ -18,6 +12,15 @@ import template from "./template.hbs";
 
 interface RegistrationPageProps {}
 
+const handleInputBlur = (e: Event) => {
+  const input = e.target as HTMLInputElement;
+  const error = inputValidate(input);
+
+  if (error) {
+    input?.setCustomValidity(error);
+  }
+};
+
 const button = new Button("button", {
   text: "sign up",
   attr: {
@@ -25,46 +28,47 @@ const button = new Button("button", {
   },
 });
 
+const firstNameInput = new Input("div", {
+  placeholder: "Enter your first name",
+  name: "first_name",
+  type: "text",
+  events: {
+    blur: handleInputBlur,
+  },
+});
+
 const firstNameField = new Field("label", {
   label: "First name",
-
   attr: {
     class: "field registration-page__form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your first name",
-    name: "first_name",
-    type: "text",
-    events: {
-      blur: (e: Event) => {
-        const input = e.target as HTMLInputElement;
-        const error = nameValidate(input.value) ? "" : "Wrong first name";
+  input: firstNameInput,
+});
 
-        input?.setCustomValidity(error);
-      },
-    },
-  }),
+const secondNameInput = new Input("div", {
+  placeholder: "Enter your second name",
+  name: "second_name",
+  type: "text",
+  events: {
+    blur: handleInputBlur,
+  },
 });
 
 const secondNameField = new Field("label", {
   label: "Second name",
-
   attr: {
     class: "field registration-page__form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your second name",
-    name: "second_name",
-    type: "text",
-    events: {
-      blur: (e: Event) => {
-        const input = e.target as HTMLInputElement;
-        const error = nameValidate(input.value) ? "" : "Wrong second name";
+  input: secondNameInput,
+});
 
-        input?.setCustomValidity(error);
-      },
-    },
-  }),
+const loginInput = new Input("div", {
+  placeholder: "Enter your login",
+  name: "login",
+  type: "text",
+  events: {
+    blur: handleInputBlur,
+  },
 });
 
 const loginField = new Field("label", {
@@ -72,19 +76,16 @@ const loginField = new Field("label", {
   attr: {
     class: "field registration-page__form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your login",
-    name: "login",
-    type: "text",
-    events: {
-      blur: (e: Event) => {
-        const input = e.target as HTMLInputElement;
-        const error = loginValidate(input.value) ? "" : "Wrong login";
+  input: loginInput,
+});
 
-        input?.setCustomValidity(error);
-      },
-    },
-  }),
+const emailInput = new Input("div", {
+  placeholder: "Enter your email",
+  name: "email",
+  type: "email",
+  events: {
+    blur: handleInputBlur,
+  },
 });
 
 const emailField = new Field("label", {
@@ -92,61 +93,41 @@ const emailField = new Field("label", {
   attr: {
     class: "field registration-page__form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your email",
-    name: "email",
-    type: "email",
-    events: {
-      blur: (e: Event) => {
-        const input = e.target as HTMLInputElement;
-        const error = emailValidate(input.value) ? "" : "Wrong email";
+  input: emailInput,
+});
 
-        input?.setCustomValidity(error);
-      },
-    },
-  }),
+const phoneInput = new Input("div", {
+  placeholder: "Enter your phone",
+  name: "phone",
+  type: "text",
+  events: {
+    blur: handleInputBlur,
+  },
 });
 
 const phoneField = new Field("label", {
   label: "Phone",
-
   attr: {
     class: "field registration-page__form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your phone",
-    name: "phone",
-    type: "text",
-    events: {
-      blur: (e: Event) => {
-        const input = e.target as HTMLInputElement;
-        const error = phoneValidate(input.value) ? "" : "Wrong phone";
+  input: phoneInput,
+});
 
-        input?.setCustomValidity(error);
-      },
-    },
-  }),
+const passwordInput = new Input("div", {
+  placeholder: "Enter your password",
+  name: "password",
+  type: "password",
+  events: {
+    blur: handleInputBlur,
+  },
 });
 
 const passwordField = new Field("label", {
   label: "Password",
-
   attr: {
     class: "field registration-page__form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your password",
-    name: "password",
-    type: "password",
-    events: {
-      blur: (e: Event) => {
-        const input = e.target as HTMLInputElement;
-        const error = passwordValidate(input.value) ? "" : "Wrong password";
-
-        input?.setCustomValidity(error);
-      },
-    },
-  }),
+  input: passwordInput,
 });
 
 const registrationForm = new RegistrationForm("form", {

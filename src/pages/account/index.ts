@@ -18,6 +18,24 @@ interface AccountPageProps {
   user?: User;
 }
 
+class AccountInput extends Input {
+  constructor(props: object) {
+    super("div", {
+      events: {
+        blur: (e: Event) => {
+          const input = e.target as HTMLInputElement;
+          const error = inputValidate(input);
+
+          if (error) {
+            input?.setCustomValidity(error);
+          }
+        },
+      },
+      ...props,
+    });
+  }
+}
+
 class UserFormField extends Field {
   constructor(label: string, input: Input) {
     super("label", {
@@ -50,15 +68,6 @@ export const toggleFormVisible = (form: PasswordForm | UserForm) => {
   if (info) {
     info.classList.toggle("hidden", isFormNodeHidden);
     formNode.classList.toggle("hidden", !isFormNodeHidden);
-  }
-};
-
-const handleInputBlur = (e: Event) => {
-  const input = e.target as HTMLInputElement;
-  const error = inputValidate(input);
-
-  if (error) {
-    input?.setCustomValidity(error);
   }
 };
 
@@ -101,13 +110,10 @@ const userFormSubmitButton = new Button("button", {
   },
 });
 
-const userFormFirstNameInput = new Input("div", {
+const userFormFirstNameInput = new AccountInput({
   placeholder: "Enter your first name",
   name: "first_name",
   type: "text",
-  events: {
-    blur: handleInputBlur,
-  },
 });
 
 const userFormFirstNameField = new UserFormField(
@@ -115,13 +121,10 @@ const userFormFirstNameField = new UserFormField(
   userFormFirstNameInput
 );
 
-const userFormSecondNameInput = new Input("div", {
+const userFormSecondNameInput = new AccountInput({
   placeholder: "Enter your second name",
   name: "second_name",
   type: "text",
-  events: {
-    blur: handleInputBlur,
-  },
 });
 
 const userFormSecondNameField = new UserFormField(
@@ -129,13 +132,10 @@ const userFormSecondNameField = new UserFormField(
   userFormSecondNameInput
 );
 
-const userFormDisplayNameInput = new Input("div", {
+const userFormDisplayNameInput = new AccountInput({
   placeholder: "Enter your display name",
   name: "display_name",
   type: "text",
-  events: {
-    blur: handleInputBlur,
-  },
 });
 
 const userFormDisplayNameField = new UserFormField(
@@ -143,35 +143,26 @@ const userFormDisplayNameField = new UserFormField(
   userFormDisplayNameInput
 );
 
-const userFormLoginInput = new Input("div", {
+const userFormLoginInput = new AccountInput({
   placeholder: "Enter your login",
   name: "login",
   type: "text",
-  events: {
-    blur: handleInputBlur,
-  },
 });
 
 const userFormLoginField = new UserFormField("Login", userFormLoginInput);
 
-const userFormEmailInput = new Input("div", {
+const userFormEmailInput = new AccountInput({
   placeholder: "Enter your email",
   name: "email",
   type: "email",
-  events: {
-    blur: handleInputBlur,
-  },
 });
 
 const userFormEmailField = new UserFormField("Email", userFormEmailInput);
 
-const userFormPhoneInput = new Input("div", {
+const userFormPhoneInput = new AccountInput({
   placeholder: "Enter your phone",
   name: "phone",
   type: "text",
-  events: {
-    blur: handleInputBlur,
-  },
 });
 
 const userFormPhoneField = new UserFormField("Phone", userFormPhoneInput);
@@ -213,13 +204,10 @@ const passwordFormSubmitButton = new Button("button", {
   },
 });
 
-const passwordFormOldPasswordInput = new Input("div", {
+const passwordFormOldPasswordInput = new AccountInput({
   placeholder: "Enter your old password",
   name: "oldPassword",
   type: "password",
-  events: {
-    blur: handleInputBlur,
-  },
 });
 
 const passwordFormOldPasswordField = new PasswordFormField(
@@ -227,13 +215,10 @@ const passwordFormOldPasswordField = new PasswordFormField(
   passwordFormOldPasswordInput
 );
 
-const passwordFormNewPasswordInput = new Input("div", {
+const passwordFormNewPasswordInput = new AccountInput({
   placeholder: "Enter your new password",
   name: "newPassword",
   type: "password",
-  events: {
-    blur: handleInputBlur,
-  },
 });
 
 const passwordFormNewPasswordField = new PasswordFormField(
@@ -241,13 +226,10 @@ const passwordFormNewPasswordField = new PasswordFormField(
   passwordFormNewPasswordInput
 );
 
-const passwordFormRepeatPasswordInput = new Input("div", {
+const passwordFormRepeatPasswordInput = new AccountInput({
   placeholder: "Repeat your new password",
   name: "repeat_newPassword",
   type: "password",
-  events: {
-    blur: handleInputBlur,
-  },
 });
 
 const passwordFormRepeatPasswordField = new PasswordFormField(

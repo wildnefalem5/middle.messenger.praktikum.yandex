@@ -8,10 +8,20 @@ interface PagePlaceholderProps {
   codeStatus: string;
   title: string;
   text: string;
-  button: Button;
 }
 
+const button = new Button("button", {
+  text: "go to chat",
+  attr: {
+    class: "button page-placeholder__button",
+  },
+});
+
 export class PagePlaceholder extends Block<PagePlaceholderProps> {
+  constructor(props: any) {
+    super("div", { button, ...props });
+  }
+
   render() {
     return this.compile(template, this._props);
   }

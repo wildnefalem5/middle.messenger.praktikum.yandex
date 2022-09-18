@@ -1,5 +1,5 @@
 import { authController } from "./../../api/controller/auth-controller";
-import { emailValidate, passwordValidate } from "./../../utils/validate";
+import { inputValidate } from "./../../utils/validate";
 import { getDataFromForm } from "./../../utils/show-form-data-console";
 import "../../styles.scss";
 import { Field } from "./../../components/field/index";
@@ -12,6 +12,24 @@ import template from "./template.hbs";
 
 interface LoginPageProps {}
 
+class LoginInput extends Input {
+  constructor(props: object) {
+    super("div", {
+      events: {
+        blur: (e: Event) => {
+          const input = e.target as HTMLInputElement;
+          const error = inputValidate(input);
+
+          if (error) {
+            input?.setCustomValidity(error);
+          }
+        },
+      },
+      ...props,
+    });
+  }
+}
+
 const button = new Button("button", {
   text: "sign in",
   attr: {
@@ -19,24 +37,24 @@ const button = new Button("button", {
   },
 });
 
+const emailInput = new LoginInput({
+  placeholder: "Enter your login",
+  name: "login",
+  type: "text",
+});
+
 const emailField = new Field("label", {
   label: "Login",
   attr: {
     class: "field login-page__form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your login",
-    name: "login",
-    type: "text",
-    events: {
-      blur: (e: Event) => {
-        const input = e.target as HTMLInputElement;
-        const error = emailValidate(input.value) ? "" : "Wrong email";
+  input: emailInput,
+});
 
-        input?.setCustomValidity(error);
-      },
-    },
-  }),
+const passwordInput = new LoginInput({
+  placeholder: "Enter your password",
+  name: "password",
+  type: "password",
 });
 
 const passwordField = new Field("label", {
@@ -44,19 +62,7 @@ const passwordField = new Field("label", {
   attr: {
     class: "field login-page__form-field",
   },
-  input: new Input("div", {
-    placeholder: "Enter your password",
-    name: "password",
-    type: "password",
-    events: {
-      blur: (e: Event) => {
-        const input = e.target as HTMLInputElement;
-        const error = passwordValidate(input.value) ? "" : "Wrong password";
-
-        input?.setCustomValidity(error);
-      },
-    },
-  }),
+  input: passwordInput,
 });
 
 const loginForm = new LoginForm("form", {

@@ -683,10 +683,23 @@ var _input = require("../../components/input");
 // @ts-ignore
 var _templateHbs = require("./template.hbs");
 var _templateHbsDefault = parcelHelpers.interopDefault(_templateHbs);
+const handleInputBlur = (e)=>{
+    const input = e.target;
+    const error = (0, _validate.inputValidate)(input);
+    if (error) input?.setCustomValidity(error);
+};
 const button = new (0, _index2.Button)("button", {
     text: "sign up",
     attr: {
         class: "button registration-page__form-button"
+    }
+});
+const firstNameInput = new (0, _input.Input)("div", {
+    placeholder: "Enter your first name",
+    name: "first_name",
+    type: "text",
+    events: {
+        blur: handleInputBlur
     }
 });
 const firstNameField = new (0, _index1.Field)("label", {
@@ -694,108 +707,82 @@ const firstNameField = new (0, _index1.Field)("label", {
     attr: {
         class: "field registration-page__form-field"
     },
-    input: new (0, _input.Input)("div", {
-        placeholder: "Enter your first name",
-        name: "first_name",
-        type: "text",
-        events: {
-            blur: (e)=>{
-                const input = e.target;
-                const error = (0, _validate.nameValidate)(input.value) ? "" : "Wrong first name";
-                input?.setCustomValidity(error);
-            }
-        }
-    })
+    input: firstNameInput
+});
+const secondNameInput = new (0, _input.Input)("div", {
+    placeholder: "Enter your second name",
+    name: "second_name",
+    type: "text",
+    events: {
+        blur: handleInputBlur
+    }
 });
 const secondNameField = new (0, _index1.Field)("label", {
     label: "Second name",
     attr: {
         class: "field registration-page__form-field"
     },
-    input: new (0, _input.Input)("div", {
-        placeholder: "Enter your second name",
-        name: "second_name",
-        type: "text",
-        events: {
-            blur: (e)=>{
-                const input = e.target;
-                const error = (0, _validate.nameValidate)(input.value) ? "" : "Wrong second name";
-                input?.setCustomValidity(error);
-            }
-        }
-    })
+    input: secondNameInput
+});
+const loginInput = new (0, _input.Input)("div", {
+    placeholder: "Enter your login",
+    name: "login",
+    type: "text",
+    events: {
+        blur: handleInputBlur
+    }
 });
 const loginField = new (0, _index1.Field)("label", {
     label: "Login",
     attr: {
         class: "field registration-page__form-field"
     },
-    input: new (0, _input.Input)("div", {
-        placeholder: "Enter your login",
-        name: "login",
-        type: "text",
-        events: {
-            blur: (e)=>{
-                const input = e.target;
-                const error = (0, _validate.loginValidate)(input.value) ? "" : "Wrong login";
-                input?.setCustomValidity(error);
-            }
-        }
-    })
+    input: loginInput
+});
+const emailInput = new (0, _input.Input)("div", {
+    placeholder: "Enter your email",
+    name: "email",
+    type: "email",
+    events: {
+        blur: handleInputBlur
+    }
 });
 const emailField = new (0, _index1.Field)("label", {
     label: "Email",
     attr: {
         class: "field registration-page__form-field"
     },
-    input: new (0, _input.Input)("div", {
-        placeholder: "Enter your email",
-        name: "email",
-        type: "email",
-        events: {
-            blur: (e)=>{
-                const input = e.target;
-                const error = (0, _validate.emailValidate)(input.value) ? "" : "Wrong email";
-                input?.setCustomValidity(error);
-            }
-        }
-    })
+    input: emailInput
+});
+const phoneInput = new (0, _input.Input)("div", {
+    placeholder: "Enter your phone",
+    name: "phone",
+    type: "text",
+    events: {
+        blur: handleInputBlur
+    }
 });
 const phoneField = new (0, _index1.Field)("label", {
     label: "Phone",
     attr: {
         class: "field registration-page__form-field"
     },
-    input: new (0, _input.Input)("div", {
-        placeholder: "Enter your phone",
-        name: "phone",
-        type: "text",
-        events: {
-            blur: (e)=>{
-                const input = e.target;
-                const error = (0, _validate.phoneValidate)(input.value) ? "" : "Wrong phone";
-                input?.setCustomValidity(error);
-            }
-        }
-    })
+    input: phoneInput
+});
+const passwordInput = new (0, _input.Input)("div", {
+    placeholder: "Enter your password",
+    name: "password",
+    type: "password",
+    events: {
+        blur: handleInputBlur
+    }
 });
 const passwordField = new (0, _index1.Field)("label", {
     label: "Password",
     attr: {
         class: "field registration-page__form-field"
     },
-    input: new (0, _input.Input)("div", {
-        placeholder: "Enter your password",
-        name: "password",
-        type: "password",
-        events: {
-            blur: (e)=>{
-                const input = e.target;
-                const error = (0, _validate.passwordValidate)(input.value) ? "" : "Wrong password";
-                input?.setCustomValidity(error);
-            }
-        }
-    })
+    input: passwordInput
 });
 const registrationForm = new (0, _index.RegistrationForm)("form", {
     firstNameField,
@@ -13125,53 +13112,44 @@ exports.default = templateFunction;
 },{"handlebars":"i0QfX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"At0ZG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "NotFoundPageComponent", ()=>NotFoundPageComponent);
 parcelHelpers.export(exports, "NotFoundPage", ()=>NotFoundPage);
 var _stylesScss = require("../../styles.scss");
+var _index = require("../../components/page-placeholder/index");
+const NotFoundPage = new (0, _index.PagePlaceholder)({
+    codeStatus: "404",
+    title: "Page not found",
+    text: "Sorry we couldn't find this page"
+});
+
+},{"../../styles.scss":"kMfPY","../../components/page-placeholder/index":"h1EZQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kMfPY":[function() {},{}],"h1EZQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PagePlaceholder", ()=>PagePlaceholder);
+var _index = require("./../button/index");
 var _block = require("../../utils/block/block");
 var _blockDefault = parcelHelpers.interopDefault(_block);
-var _index = require("../../components/page-placeholder/index");
-var _index1 = require("../../components/button/index");
 // @ts-ignore
 var _templateHbs = require("./template.hbs");
 var _templateHbsDefault = parcelHelpers.interopDefault(_templateHbs);
-const button = new (0, _index1.Button)("button", {
+const button = new (0, _index.Button)("button", {
     text: "go to chat",
     attr: {
         class: "button page-placeholder__button"
     }
 });
-const pagePlaceholder = new (0, _index.PagePlaceholder)("div", {
-    codeStatus: "404",
-    title: "Page not found",
-    text: "Sorry we couldn't find this page",
-    button
-});
-class NotFoundPageComponent extends (0, _blockDefault.default) {
-    render() {
-        return this.compile((0, _templateHbsDefault.default), this._props);
-    }
-}
-const NotFoundPage = new NotFoundPageComponent("div", {
-    pagePlaceholder
-});
-
-},{"../../styles.scss":"kMfPY","../../utils/block/block":"7JIRe","../../components/page-placeholder/index":"h1EZQ","../../components/button/index":"dZaQH","./template.hbs":"bcNJe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kMfPY":[function() {},{}],"h1EZQ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "PagePlaceholder", ()=>PagePlaceholder);
-var _block = require("../../utils/block/block");
-var _blockDefault = parcelHelpers.interopDefault(_block);
-// @ts-ignore
-var _templateHbs = require("./template.hbs");
-var _templateHbsDefault = parcelHelpers.interopDefault(_templateHbs);
 class PagePlaceholder extends (0, _blockDefault.default) {
+    constructor(props){
+        super("div", {
+            button,
+            ...props
+        });
+    }
     render() {
         return this.compile((0, _templateHbsDefault.default), this._props);
     }
 }
 
-},{"../../utils/block/block":"7JIRe","./template.hbs":"8n97m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8n97m":[function(require,module,exports) {
+},{"./../button/index":"dZaQH","../../utils/block/block":"7JIRe","./template.hbs":"8n97m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8n97m":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _handlebars = require("handlebars");
@@ -13262,111 +13240,19 @@ const templateFunction = (0, _handlebarsDefault.default).template({
 });
 exports.default = templateFunction;
 
-},{"handlebars":"i0QfX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bcNJe":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _handlebars = require("handlebars");
-var _handlebarsDefault = parcelHelpers.interopDefault(_handlebars);
-const templateFunction = (0, _handlebarsDefault.default).template({
-    "compiler": [
-        8,
-        ">= 4.3.0"
-    ],
-    "main": function(container, depth0, helpers, partials, data) {
-        var stack1, helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-            if (Object.prototype.hasOwnProperty.call(parent, propertyName)) return parent[propertyName];
-            return undefined;
-        };
-        return (stack1 = (helper = (helper = lookupProperty(helpers, "pagePlaceholder") || (depth0 != null ? lookupProperty(depth0, "pagePlaceholder") : depth0)) != null ? helper : container.hooks.helperMissing, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
-            "name": "pagePlaceholder",
-            "hash": {},
-            "data": data,
-            "loc": {
-                "start": {
-                    "line": 1,
-                    "column": 0
-                },
-                "end": {
-                    "line": 1,
-                    "column": 23
-                }
-            }
-        }) : helper)) != null ? stack1 : "";
-    },
-    "useData": true
-});
-exports.default = templateFunction;
-
 },{"handlebars":"i0QfX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1yn2S":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ServiceWorkPageComponent", ()=>ServiceWorkPageComponent);
 parcelHelpers.export(exports, "ServiceWorkPage", ()=>ServiceWorkPage);
 var _stylesScss = require("../../styles.scss");
-var _block = require("../../utils/block/block");
-var _blockDefault = parcelHelpers.interopDefault(_block);
 var _index = require("../../components/page-placeholder/index");
-var _index1 = require("../../components/button/index");
-// @ts-ignore
-var _templateHbs = require("./template.hbs");
-var _templateHbsDefault = parcelHelpers.interopDefault(_templateHbs);
-const button = new (0, _index1.Button)("button", {
-    text: "go to chat",
-    attr: {
-        class: "button page-placeholder__button"
-    }
-});
-const pagePlaceholder = new (0, _index.PagePlaceholder)("div", {
+const ServiceWorkPage = new (0, _index.PagePlaceholder)({
     codeStatus: "500",
     title: "Service work",
-    text: "Sorry, we working on some problem.",
-    button
-});
-class ServiceWorkPageComponent extends (0, _blockDefault.default) {
-    render() {
-        return this.compile((0, _templateHbsDefault.default), this._props);
-    }
-}
-const ServiceWorkPage = new ServiceWorkPageComponent("div", {
-    pagePlaceholder
+    text: "Sorry, we working on some problem."
 });
 
-},{"../../styles.scss":"kMfPY","../../utils/block/block":"7JIRe","../../components/page-placeholder/index":"h1EZQ","../../components/button/index":"dZaQH","./template.hbs":"56NTk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kMfPY":[function() {},{}],"56NTk":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _handlebars = require("handlebars");
-var _handlebarsDefault = parcelHelpers.interopDefault(_handlebars);
-const templateFunction = (0, _handlebarsDefault.default).template({
-    "compiler": [
-        8,
-        ">= 4.3.0"
-    ],
-    "main": function(container, depth0, helpers, partials, data) {
-        var stack1, helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
-            if (Object.prototype.hasOwnProperty.call(parent, propertyName)) return parent[propertyName];
-            return undefined;
-        };
-        return (stack1 = (helper = (helper = lookupProperty(helpers, "pagePlaceholder") || (depth0 != null ? lookupProperty(depth0, "pagePlaceholder") : depth0)) != null ? helper : container.hooks.helperMissing, typeof helper === "function" ? helper.call(depth0 != null ? depth0 : container.nullContext || {}, {
-            "name": "pagePlaceholder",
-            "hash": {},
-            "data": data,
-            "loc": {
-                "start": {
-                    "line": 1,
-                    "column": 0
-                },
-                "end": {
-                    "line": 1,
-                    "column": 23
-                }
-            }
-        }) : helper)) != null ? stack1 : "";
-    },
-    "useData": true
-});
-exports.default = templateFunction;
-
-},{"handlebars":"i0QfX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"j5R60":[function(require,module,exports) {
+},{"../../styles.scss":"kMfPY","../../components/page-placeholder/index":"h1EZQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kMfPY":[function() {},{}],"j5R60":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ChatPageComponent", ()=>ChatPageComponent);
@@ -13661,6 +13547,20 @@ var _input = require("../../components/input");
 // @ts-ignore
 var _templateHbs = require("./template.hbs");
 var _templateHbsDefault = parcelHelpers.interopDefault(_templateHbs);
+class AccountInput extends (0, _input.Input) {
+    constructor(props){
+        super("div", {
+            events: {
+                blur: (e)=>{
+                    const input = e.target;
+                    const error = (0, _validate.inputValidate)(input);
+                    if (error) input?.setCustomValidity(error);
+                }
+            },
+            ...props
+        });
+    }
+}
 class UserFormField extends (0, _index2.Field) {
     constructor(label, input){
         super("label", {
@@ -13691,11 +13591,6 @@ const toggleFormVisible = (form)=>{
         info.classList.toggle("hidden", isFormNodeHidden);
         formNode.classList.toggle("hidden", !isFormNodeHidden);
     }
-};
-const handleInputBlur = (e)=>{
-    const input = e.target;
-    const error = (0, _validate.inputValidate)(input);
-    if (error) input?.setCustomValidity(error);
 };
 const editInfoButton = new (0, _index3.Button)("button", {
     text: "Edit info",
@@ -13733,58 +13628,40 @@ const userFormSubmitButton = new (0, _index3.Button)("button", {
         }
     }
 });
-const userFormFirstNameInput = new (0, _input.Input)("div", {
+const userFormFirstNameInput = new AccountInput({
     placeholder: "Enter your first name",
     name: "first_name",
-    type: "text",
-    events: {
-        blur: handleInputBlur
-    }
+    type: "text"
 });
 const userFormFirstNameField = new UserFormField("First name", userFormFirstNameInput);
-const userFormSecondNameInput = new (0, _input.Input)("div", {
+const userFormSecondNameInput = new AccountInput({
     placeholder: "Enter your second name",
     name: "second_name",
-    type: "text",
-    events: {
-        blur: handleInputBlur
-    }
+    type: "text"
 });
 const userFormSecondNameField = new UserFormField("Second name", userFormSecondNameInput);
-const userFormDisplayNameInput = new (0, _input.Input)("div", {
+const userFormDisplayNameInput = new AccountInput({
     placeholder: "Enter your display name",
     name: "display_name",
-    type: "text",
-    events: {
-        blur: handleInputBlur
-    }
+    type: "text"
 });
 const userFormDisplayNameField = new UserFormField("Login", userFormDisplayNameInput);
-const userFormLoginInput = new (0, _input.Input)("div", {
+const userFormLoginInput = new AccountInput({
     placeholder: "Enter your login",
     name: "login",
-    type: "text",
-    events: {
-        blur: handleInputBlur
-    }
+    type: "text"
 });
 const userFormLoginField = new UserFormField("Login", userFormLoginInput);
-const userFormEmailInput = new (0, _input.Input)("div", {
+const userFormEmailInput = new AccountInput({
     placeholder: "Enter your email",
     name: "email",
-    type: "email",
-    events: {
-        blur: handleInputBlur
-    }
+    type: "email"
 });
 const userFormEmailField = new UserFormField("Email", userFormEmailInput);
-const userFormPhoneInput = new (0, _input.Input)("div", {
+const userFormPhoneInput = new AccountInput({
     placeholder: "Enter your phone",
     name: "phone",
-    type: "text",
-    events: {
-        blur: handleInputBlur
-    }
+    type: "text"
 });
 const userFormPhoneField = new UserFormField("Phone", userFormPhoneInput);
 const userForm = new (0, _index.UserForm)("form", {
@@ -13821,31 +13698,22 @@ const passwordFormSubmitButton = new (0, _index3.Button)("button", {
         }
     }
 });
-const passwordFormOldPasswordInput = new (0, _input.Input)("div", {
+const passwordFormOldPasswordInput = new AccountInput({
     placeholder: "Enter your old password",
     name: "oldPassword",
-    type: "password",
-    events: {
-        blur: handleInputBlur
-    }
+    type: "password"
 });
 const passwordFormOldPasswordField = new PasswordFormField("Old password", passwordFormOldPasswordInput);
-const passwordFormNewPasswordInput = new (0, _input.Input)("div", {
+const passwordFormNewPasswordInput = new AccountInput({
     placeholder: "Enter your new password",
     name: "newPassword",
-    type: "password",
-    events: {
-        blur: handleInputBlur
-    }
+    type: "password"
 });
 const passwordFormNewPasswordField = new PasswordFormField("New password", passwordFormNewPasswordInput);
-const passwordFormRepeatPasswordInput = new (0, _input.Input)("div", {
+const passwordFormRepeatPasswordInput = new AccountInput({
     placeholder: "Repeat your new password",
     name: "repeat_newPassword",
-    type: "password",
-    events: {
-        blur: handleInputBlur
-    }
+    type: "password"
 });
 const passwordFormRepeatPasswordField = new PasswordFormField("Repeat new password", passwordFormRepeatPasswordInput);
 const passwordForm = new (0, _index1.PasswordForm)("form", {
@@ -13912,26 +13780,28 @@ class AccountPageComponent extends (0, _blockDefault.default) {
     constructor(tag, props){
         super(tag, props);
         this._store.on((0, _store.StoreEvents).UPDATED, ()=>{
+            const state = this._store.getState();
             this.setProps({
-                user: this._store.getState().user
+                user: state.user
             });
+            const { user  } = state;
             userFormFirstNameInput.setProps({
-                value: this._props.user?.first_name
+                value: user?.first_name
             });
             userFormSecondNameInput.setProps({
-                value: this._props.user?.second_name
+                value: user?.second_name
             });
             userFormDisplayNameInput.setProps({
-                value: this._props.user?.display_name
+                value: user?.display_name
             });
             userFormLoginInput.setProps({
-                value: this._props.user?.login
+                value: user?.login
             });
             userFormEmailInput.setProps({
-                value: this._props.user?.email
+                value: user?.email
             });
             userFormPhoneInput.setProps({
-                value: this._props.user?.phone
+                value: user?.phone
             });
         });
     }
@@ -14390,47 +14260,49 @@ var _input = require("../../components/input");
 // @ts-ignore
 var _templateHbs = require("./template.hbs");
 var _templateHbsDefault = parcelHelpers.interopDefault(_templateHbs);
+class LoginInput extends (0, _input.Input) {
+    constructor(props){
+        super("div", {
+            events: {
+                blur: (e)=>{
+                    const input = e.target;
+                    const error = (0, _validate.inputValidate)(input);
+                    if (error) input?.setCustomValidity(error);
+                }
+            },
+            ...props
+        });
+    }
+}
 const button = new (0, _index1.Button)("button", {
     text: "sign in",
     attr: {
         class: "button login-page__form-button"
     }
 });
+const emailInput = new LoginInput({
+    placeholder: "Enter your login",
+    name: "login",
+    type: "text"
+});
 const emailField = new (0, _index.Field)("label", {
     label: "Login",
     attr: {
         class: "field login-page__form-field"
     },
-    input: new (0, _input.Input)("div", {
-        placeholder: "Enter your login",
-        name: "login",
-        type: "text",
-        events: {
-            blur: (e)=>{
-                const input = e.target;
-                const error = (0, _validate.emailValidate)(input.value) ? "" : "Wrong email";
-                input?.setCustomValidity(error);
-            }
-        }
-    })
+    input: emailInput
+});
+const passwordInput = new LoginInput({
+    placeholder: "Enter your password",
+    name: "password",
+    type: "password"
 });
 const passwordField = new (0, _index.Field)("label", {
     label: "Password",
     attr: {
         class: "field login-page__form-field"
     },
-    input: new (0, _input.Input)("div", {
-        placeholder: "Enter your password",
-        name: "password",
-        type: "password",
-        events: {
-            blur: (e)=>{
-                const input = e.target;
-                const error = (0, _validate.passwordValidate)(input.value) ? "" : "Wrong password";
-                input?.setCustomValidity(error);
-            }
-        }
-    })
+    input: passwordInput
 });
 const loginForm = new (0, _loginForm.LoginForm)("form", {
     emailField,
