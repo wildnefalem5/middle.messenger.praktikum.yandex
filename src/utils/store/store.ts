@@ -5,6 +5,18 @@ export enum StoreEvents {
   UPDATED = "updated",
 }
 
+export interface Chat {
+  id: number;
+  title: string;
+  avatar: string;
+  unread_count: number;
+  last_message: {
+    user: User;
+    time: string;
+    content: string;
+  };
+}
+
 export interface User {
   login: string;
   email: string;
@@ -13,10 +25,20 @@ export interface User {
   display_name?: string;
   phone: string | number;
   avatar: string;
+  id?: number;
+}
+
+interface Message {
+  content: string;
+  id: number;
+  time: string;
+  user_id: number;
 }
 
 interface State {
   user?: User;
+  chats?: Chat[];
+  messages?: Message[];
 }
 
 export class Store extends EventBus {

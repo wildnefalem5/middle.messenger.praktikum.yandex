@@ -10,10 +10,8 @@ export class ChatApi extends Api {
     });
   }
 
-  public loadMore(limit: number = 20) {
-    const limitParam = `limit=${limit}`;
-
-    return this._http.get(`/chats/?${limitParam}`, {});
+  public loadMore() {
+    return this._http.get(`/chats`, {});
   }
 
   public invite(options: IRequestOptions<RequestChatUserData>) {
@@ -32,6 +30,10 @@ export class ChatApi extends Api {
   }
 
   public getToken(id: number) {
-    return this._http.post(`/chats/token/${id}`);
+    return this._http.post(`/chats/token/${id}`).then(response => {
+      const data = JSON.parse(response.response);
+
+      return data.token
+    });
   }
 }

@@ -1,3 +1,4 @@
+import { store } from "./store/store";
 import EventBus from "./event-bus";
 
 export enum WebsocketEvents {
@@ -69,7 +70,21 @@ export class WebSocketApi extends EventBus {
   };
 
   private _handleMessage = (event: MessageEvent<any>) => {
-    this.emit(WebsocketEvents.MESSAGE, event.data);
+    const message = JSON.parse(event.data);
+
+    if (message.type === WebSocketMessages.MESSAGE) {
+      const state = store.getState();
+      const prevStateMessages = state.messages || [];
+      const user = state.user;
+      const preparedMessage = {
+        ...message,
+        is_my_message: user?.id === message.user_id,
+      };
+
+      store.setState("messages", [...prevStateMessages, preparedMessage]);
+
+      this.emit(WebsocketEvents.MESSAGE, event.data);
+    }
   };
 
   private _handleClose = (event: CloseEvent) => {

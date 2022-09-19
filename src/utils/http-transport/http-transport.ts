@@ -56,7 +56,7 @@ export class HTTPTransport {
     url: string,
     options: IRequestOptions<any> = {},
     timeout = 5000
-  ): Promise<XMLHttpRequest> {
+  ): Promise<any> {
     const { headers = {}, method, data } = options;
     const preparedUrl = `${this._baseUrl}${url}`;
 

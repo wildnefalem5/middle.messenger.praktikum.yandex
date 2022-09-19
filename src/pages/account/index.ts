@@ -1,7 +1,8 @@
+import { BackToChat } from './components/back-to-chat/index';
 import { userController } from "./../../api/controller/user-controller";
 import { authController } from "./../../api/controller/auth-controller";
 import { StoreEvents, User } from "../../utils/store/store";
-import { Router } from "../../utils/router/router";
+import { router } from "../../utils/router/router";
 import "../../styles.scss";
 import { inputValidate } from "./../../utils/validate";
 import { UserForm } from "./components/user-form/index";
@@ -185,7 +186,7 @@ const userForm = new UserForm("form", {
       const form = e.target as HTMLFormElement;
 
       const data = getDataFromForm(form);
-
+      
       userController.updateProfile({ data });
     },
   },
@@ -261,13 +262,11 @@ const passwordForm = new PasswordForm("form", {
 const logoutButton = new Button("button", {
   text: "Log out",
   attr: {
-    class: "account-page__logout",
+    class: "button account-page__logout-button",
     type: "button",
   },
   events: {
     click: () => {
-      const router = new Router("#root");
-
       authController.logout();
 
       router.go("/");
@@ -284,10 +283,10 @@ const avatarInput = new Input("div", {
   events: {
     change: (e: Event) => {
       const input = e.target as HTMLInputElement;
-      const file = input.files[0];
+      const file = input?.files?.[0];
 
       if (file) {
-        const data = new FormData();
+        const data = new FormData() as any
         data.append("avatar", file);
 
         userController.updateAvatar({ data });
@@ -303,6 +302,17 @@ const avatarField = new Field("label", {
   },
   input: avatarInput,
 });
+
+const backToChat = new BackToChat('div', {
+  attr: {
+    class: "account-page__back-to-chat"
+  },
+  events: {
+    click: () => {
+      router.go('/messenger')
+    }
+  }
+})
 
 export class AccountPageComponent extends Block<AccountPageProps> {
   constructor(tag: string, props: any) {
@@ -336,4 +346,5 @@ export const AccountPage = new AccountPageComponent("div", {
   editInfoButton,
   changePasswordButton,
   logoutButton,
+  backToChat
 });

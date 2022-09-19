@@ -1,3 +1,5 @@
+import { store } from './../../utils/store/store';
+import { router } from "./../../utils/router/router";
 import { authController } from "./../../api/controller/auth-controller";
 import { inputValidate } from "./../../utils/validate";
 import { getDataFromForm } from "./../../utils/show-form-data-console";
@@ -86,11 +88,20 @@ const loginForm = new LoginForm("form", {
 });
 
 export class LoginPageComponent extends Block<LoginPageProps> {
+  constructor() {
+    super("div", { loginForm });
+
+    authController.getUser().then((user) => {
+      if (user) {
+        store.setState('user', user)
+        router.go("/messenger");
+      }
+    });
+  }
+
   render() {
     return this.compile(template, this._props);
   }
 }
 
-export const LoginPage = new LoginPageComponent("div", {
-  loginForm,
-});
+export const LoginPage = new LoginPageComponent();

@@ -1,13 +1,25 @@
 <div class="chat-page">
     <div class="chat-page__panel">
-        <div class="chat-page__search"></div>
-        <div class="chat-page__users"></div>
+        <div class="chat-page__search chat-page__panel-header"></div>
+        <div class="chat-page__chats chat-page__panel-body">
+                {{#each chats}}
+                    <div class="chat-page__chats-item" data-chat-id="{{ id }}" data-chat-title="{{ title }}">{{title}}</div>
+                {{/each}}
+        </div>
+        <div class="chat-page__panel-footer">
+            {{{ chatCreatorForm }}}
+        </div>
     </div>
     <div class="chat-page__chat">
         <div class="chat-page__chat-header">
+            {{{ chatHeader }}}
             {{{ accountButton }}}
         </div>
-        <div class="chat-page__chat-messages"></div>
+        <div class="chat-page__chat-messages">
+            {{#each messages}}
+                <div class="chat-page__chat-messages-item {{#if is_my_message}}chat-page__chat-messages-item--myself{{/if}}">{{content}}</div>
+            {{/each}}
+        </div>
         <div class="chat-page__chat-footer">
             {{{ messageForm }}}
         </div>

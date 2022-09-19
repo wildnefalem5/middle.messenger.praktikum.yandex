@@ -2,9 +2,42 @@
   display: flex;
   height: 100vh;
 
+  &__chat-creator-form {
+    display: flex;
+  }
+
+  &__chats {
+    display: flex;
+    flex-flow: column;
+    row-gap: 0.4rem;
+
+    &-item {
+      padding: 1.6rem 2.4rem;
+      font-weight: 700;
+      background-color: #f3f3f3;
+      cursor: pointer;
+    }
+  }
+
   &__panel {
+    display: flex;
+    flex-flow: column;
     width: 30rem;
-    border: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+
+    &-header {
+      min-height: 4rem;
+    }
+
+    &-body {
+      border: solid $border-color;
+      border-width: 1px 0;
+      flex: 1;
+    }
+
+    &-footer {
+      min-height: 4rem;
+    }
   }
 
   &__chat {
@@ -14,17 +47,38 @@
 
     &-header {
       display: flex;
-      height: 4rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem;
+
+      &-title {
+        text-transform: uppercase;
+        font-weight: 700;
+      }
 
       &-account-button {
-        margin-left: auto;
       }
     }
 
     &-messages {
+      display: flex;
+      flex-flow: column;
       flex: 1;
       border-top: 1px solid $border-color;
       border-bottom: 1px solid $border-color;
+      padding: 2rem;
+      row-gap: 1.2rem;
+
+      &-item {
+        align-self: flex-start;
+        background-color: #f3f3f3;
+        padding: 1.2rem 2.4rem;
+
+        &--myself {
+          align-self: flex-end;
+          background-color: green;
+        }
+      }
     }
 
     &-footer {

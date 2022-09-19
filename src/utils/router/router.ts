@@ -71,3 +71,5 @@ export class Router {
     history.forward();
   }
 }
+
+export const router = new Router("#root");

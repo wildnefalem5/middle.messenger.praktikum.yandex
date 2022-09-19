@@ -28,5 +28,5 @@ export interface RequestUserData {
   second_name: string;
   display_name?: string;
   phone: string | number;
-  avatar: string;
+  avatar?: string;
 }
