@@ -1,3 +1,4 @@
+import { store } from './../../utils/store/store';
 import { router } from "./../../utils/router/router";
 import { authController } from "./../../api/controller/auth-controller";
 import { inputValidate } from "./../../utils/validate";
@@ -92,7 +93,7 @@ export class LoginPageComponent extends Block<LoginPageProps> {
 
     authController.getUser().then((user) => {
       if (user) {
-        console.log(user)
+        store.setState('user', user)
         router.go("/messenger");
       }
     });
