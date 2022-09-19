@@ -1,11 +1,13 @@
-const { webpackBaseConfig } = require("./webpack-base-config");
+const webpackBaseConfig = require("./webpack-base-config");
 
 const path = require("path");
 
-export const WebpackProdConfig = {
-  ...webpackBaseConfig,
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "project.bundle.js",
-  },
+module.exports = function webpackProdConfig() {
+  return {
+    ...webpackBaseConfig(),
+    output: {
+      path: path.resolve(__dirname, "dist"),
+      filename: "project.bundle.js",
+    },
+  };
 };
